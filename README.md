@@ -1,5 +1,12 @@
 # 301-project-tempname
 
+## Team
+
+- James Ian R. Solima
+- Sheldon Pierce
+- Ethan Albers
+- Reed Vogt
+
 ## Cooperation Plan
 
 <details closed> <summary> Coop Plan </summary>
