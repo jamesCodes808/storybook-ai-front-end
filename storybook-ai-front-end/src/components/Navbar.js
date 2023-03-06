@@ -14,13 +14,13 @@ import {
   } from '@chakra-ui/react';
   import { Link as ReactLink } from 'react-router-dom';
   import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-  import { MdLocalDrink } from 'react-icons/md';
-  
+  // import { MdLocalDrink } from 'react-icons/md';
+
   const links = [
     { linkName: 'Bookshelf', path: '/bookshelf' },
     { linkName: 'About', path: '/about' },
   ];
-  
+
   const NavLink = ({ path, children }) => (
     <Link
       as={ReactLink}
@@ -36,7 +36,7 @@ import {
       {children}
     </Link>
   );
-  
+
   const Navbar = () => {
     const { isOpen, onClose, onOpen } = useDisclosure();
     const { colorMode, toggleColorMode } = useColorMode();
@@ -115,5 +115,5 @@ import {
       </Box>
     );
   };
-  
+
   export default Navbar;

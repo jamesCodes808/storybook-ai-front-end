@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.0.1",
-    "react-bootstrap": "^2.3.0",
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
@@ -17,7 +16,7 @@
     "bootstrap": "^5.2.3",
     "framer-motion": "^10.1.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.2",
+    "react-bootstrap": "^2.3.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
