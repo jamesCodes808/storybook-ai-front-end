@@ -63,16 +63,27 @@ import {
                   {link.linkName}
                 </NavLink>
               ))}
-            </HStack>
           </HStack>
-          <Flex alignItems='center'>
-            <NavLink>
-              <Icon
-                as={colorMode === 'light' ? MoonIcon : SunIcon}
-                alignSelf='center'
-                onClick={() => toggleColorMode()}
-              ></Icon>
-            </NavLink>
+        </HStack>
+        <Flex alignItems='center'>
+          <NavLink>
+            <Icon
+              as={colorMode === 'light' ? MoonIcon : SunIcon}
+              alignSelf='center'
+              onClick={() => toggleColorMode()}
+            ></Icon>
+          </NavLink>
+          {useAuth0().isAuthenticated ?
+            <Button
+              as={ReactLink}
+              to='/logout'
+              p={2}
+              fontSize='sm'
+              fontWeight={400}
+              variant='link'>
+              Sign Out
+            </Button>
+            :
             <Button
               as={ReactLink}
               to='/login'
@@ -82,38 +93,39 @@ import {
               variant='link'
             >
               Sign In
-            </Button>
-            <Button
-              as={ReactLink}
-              to='/registration'
-              m={2}
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize='sm'
-              fontWeight={600}
-              _hover={{ bg: 'orange.400' }}
-              bg='blue.500'
-              color='white'
-            >
-              Sign Up
-            </Button>
-          </Flex>
+            </Button>}
+
+          <Button
+            as={ReactLink}
+            to='/registration'
+            m={2}
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize='sm'
+            fontWeight={600}
+            _hover={{ bg: 'orange.400' }}
+            bg='blue.500'
+            color='white'
+          >
+            Sign Up
+          </Button>
         </Flex>
-        {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
-            <Stack as='nav' spacing={4}>
-              {links.map((link) => (
-                <NavLink key={link.linkName} path={link.path}>
-                  {link.linkName}
-                </NavLink>
-              ))}
-              <NavLink key='sign up' path='/registration'>
-                Sign Up
+      </Flex>
+      {isOpen ? (
+        <Box pb={4} display={{ md: 'none' }}>
+          <Stack as='nav' spacing={4}>
+            {links.map((link) => (
+              <NavLink key={link.linkName} path={link.path}>
+                {link.linkName}
               </NavLink>
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
-    );
-  };
-  
-  export default Navbar;
+            ))}
+            <NavLink key='sign up' path='/registration'>
+              Sign Up
+            </NavLink>
+          </Stack>
+        </Box>
+      ) : null}
+    </Box>
+  );
+};
+
+export default Navbar;
