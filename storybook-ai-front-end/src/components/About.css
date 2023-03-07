@@ -76,3 +76,33 @@
         font-size: 30px;
     }
 }
+
+.profile-social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.profile-social-links a {
+    color: #777;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.profile-social-links a:hover {
+    color: #212529;
+    transform: scale(1.2);
+}
+.profile-social-links a {
+    color: #777;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.profile-social-links a svg {
+    margin-right: 0.5rem;
+}
