@@ -4,7 +4,7 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, VStack, Center } from '@chakra-ui/react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 
 import CreateBook from './CreateBook';
 import Book from './Book';
@@ -37,7 +37,7 @@ class Bookshelf extends React.Component {
         } catch (err) {
             console.error(err)
         }
-    }
+    };
 
     getBooks = async () => {
         let apiUrl = `${SERVER}/books`
@@ -48,25 +48,30 @@ class Bookshelf extends React.Component {
         } catch (err) {
             console.error(err)
         }
-    }
+    };
 
-    updateBook = async (book) => {
+    updateBook = async () => {
         try {
 
         } catch (err) {
             console.error(err)
         }
-    }
+    };
 
-    handleSelectCarousel = (selectedIdx) => {
-        this.setState({
-            index: selectedIdx
-        })
-    }
+    deleteBook = async (id) => {
+        let apiUrl = `${SERVER}/books/${id}`
+        try {
+            const response = await axios.delete(apiUrl)
+            console.log(response.data)
+            this.getBooks()
+        } catch (err) {
+            console.error(err)
+        }
+    };
 
     componentDidMount() {
         this.getBooks();
-    }
+    };
 
     render() {
         console.log(this.props.auth0)
@@ -75,17 +80,19 @@ class Bookshelf extends React.Component {
 
                 <VStack>
 
+                    {/* insert books and create book button style this to align on the right side of the page*/}
+
                     {this.props.auth0.isAuthenticated ?
                         <>
-                            {/* <img src={this.props.auth0.user.picture}></img> */}
+                            <Container>
+                                <CreateBook
+                                    postBook={this.postBook}
+                                    test={this.state.sampleProp} />
+                            </Container>
                             {this.state.createdBooks.length > 0 ?
                                 <>
                                     <Container>
-                                        {/* <Carousel
-                                            className='text-center'
-                                            activeIndex={this.state.index}
-                                            onSelect={this.handleSelectCarousel}
-                                        > */}
+
                                         {this.state.createdBooks.map(book => {
                                             return <Card style={{ textAlign: 'center' }}>
                                                 <Center>
@@ -95,21 +102,13 @@ class Bookshelf extends React.Component {
                                                 <Card.Body>
                                                     <Card.Title>{book.title}</Card.Title>
                                                     <Book
-                                                        book={book} />
+                                                        book={book}
+                                                        deleteBook={this.deleteBook} />
                                                 </Card.Body>
 
                                             </Card>
                                         })}
-                                        {/* <Carousel.Item>
-                                                <img
-                                                    alt=''></img>
-                                                <Carousel.Caption>
-                                                    { }
-                                                </Carousel.Caption>
-                                            </Carousel.Item> */}
-                                        {/* insert map that will map pages of the book when created */}
-                                        {/* 
-                                        </Carousel> */}
+
                                     </Container>
                                 </>
                                 :
@@ -117,12 +116,6 @@ class Bookshelf extends React.Component {
                             }
 
 
-                            {/* insert books and create book button */}
-                            <Container>
-                                <CreateBook
-                                    postBook={this.postBook}
-                                    test={this.state.sampleProp} />
-                            </Container>
 
                         </>
                         :
