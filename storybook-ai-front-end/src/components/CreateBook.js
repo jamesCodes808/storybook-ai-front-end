@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
     Modal,
     ModalOverlay,
@@ -16,17 +16,19 @@ import Form from 'react-bootstrap/Form';
 const CreateBook = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const postBook = props.postBook;
-    const test = props.test;
 
+    console.log(isOpen)
 
     const handleSubmitCreateBook = (e) => {
         e.preventDefault();
         const prompt = {
+            title: e.target.formTitle.value,
             noun: e.target.formNoun.value,
             verb: e.target.formVerb.value,
-            place: e.target.formPlace.value
+            location: e.target.formLocation.value
         }
         postBook(prompt);
+        onClose();
     }
 
     return (
@@ -44,6 +46,13 @@ const CreateBook = (props) => {
                             <ModalCloseButton />
                             <ModalBody>
                                 <Form onSubmit={handleSubmitCreateBook}>
+                                    <Form.Group>
+                                        <Form.Label>Title: </Form.Label>
+                                        <Form.Control
+                                            type='text'
+                                            placeholder='Whats the title of your book?'
+                                            id='formTitle'></Form.Control>
+                                    </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Noun: </Form.Label>
                                         <Form.Control
@@ -63,13 +72,14 @@ const CreateBook = (props) => {
                                         <Form.Control
                                             type='text'
                                             placeholder='Enter a location, even the moon'
-                                            id='formPlace'></Form.Control>
+                                            id='formLocation'></Form.Control>
                                     </Form.Group>
                                     <Center>
                                         <Button
                                             m={6}
                                             colorScheme={'blue'}
-                                            type='submit'>Create Book</Button>
+                                            type='submit'>Create Book
+                                        </Button>
                                     </Center>
                                 </Form>
                             </ModalBody>

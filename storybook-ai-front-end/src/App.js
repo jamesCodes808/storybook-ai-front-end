@@ -5,8 +5,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Bookshelf from './components/Bookshelf';
-
-
+import Login from './Auth/Login'
+import Logout from './Auth/Logout'
 
 function App() {
   return (
@@ -20,6 +20,16 @@ function App() {
               path="/bookshelf"
               element={<Bookshelf />} >
 
+            </Route>
+
+            <Route
+              path='/login'
+              element={<Login />} >
+            </Route>
+
+            <Route
+              path='/logout'
+              element={<Logout />} >
             </Route>
 
           </Routes>

@@ -14,12 +14,14 @@ import {
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { MdLocalDrink } from 'react-icons/md';
+import { useAuth0 } from '@auth0/auth0-react';
+
 
 const links = [
   { linkName: 'Bookshelf', path: '/bookshelf' },
   { linkName: 'About', path: '/about' },
 ];
+
 
 const NavLink = ({ path, children }) => (
   <Link
@@ -52,8 +54,6 @@ const Navbar = () => {
         <HStack>
           <Link as={ReactLink} to='/'>
             <Flex alignItems='center'>
-              {/* Icon goes here */}
-              {/* <Icon as={MdLocalDrink} h={6} w={6} color='orange.400' /> */}
               <Text fontWeight='extrabold'>StoryBook-AI</Text>
             </Flex>
           </Link>
@@ -75,16 +75,28 @@ const Navbar = () => {
               onClick={() => toggleColorMode()}
             ></Icon>
           </NavLink>
-          <Button
-            as={ReactLink}
-            to='/login'
-            p={2}
-            fontSize='sm'
-            fontWeight={400}
-            variant='link'
-          >
-            Sign In
-          </Button>
+          {useAuth0().isAuthenticated ?
+            <Button
+              as={ReactLink}
+              to='/logout'
+              p={2}
+              fontSize='sm'
+              fontWeight={400}
+              variant='link'>
+              Sign Out
+            </Button>
+            :
+            <Button
+              as={ReactLink}
+              to='/login'
+              p={2}
+              fontSize='sm'
+              fontWeight={400}
+              variant='link'
+            >
+              Sign In
+            </Button>}
+
           <Button
             as={ReactLink}
             to='/registration'

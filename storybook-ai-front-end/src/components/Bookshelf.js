@@ -1,9 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+
 import { withAuth0 } from '@auth0/auth0-react';
-import { Container, Center, VStack } from '@chakra-ui/react';
-import Carousel from 'react-bootstrap/Carousel';
+import { Container, VStack, Center } from '@chakra-ui/react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
 import CreateBook from './CreateBook';
+import Book from './Book';
+// import Login from '../Auth/Login';
+
+const SERVER = process.env.REACT_APP_SERVER;
+
 
 class Bookshelf extends React.Component {
 
@@ -12,27 +20,31 @@ class Bookshelf extends React.Component {
         this.state = {
             authenticatedTemp: true,
             sampleProp: 'sample prop',
-            createdBook: [],
+            createdBooks: [],
             index: 0,
         }
     }
 
 
     postBook = async (inputData) => {
-        let prompt = `create a 4 sentence story with 4 words each sentence of a ${inputData.noun} ${inputData.verb} at ${inputData.place}`
-        console.log(prompt)
-        // try {
-        //     let newBook = await axios.post(`url`, inputData)
-        //     console.log(newBook);
-        // } catch (err) {
-        //     console.error(err)
-        // }
+
+        console.log(inputData)
+        try {
+            let newBook = await axios.post(`${SERVER}/books`, inputData)
+            this.setState(prevState => ({ createdBooks: [...prevState.createdBooks, newBook] }));
+            this.getBooks()
+            console.log(this.state.createdBooks)
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     getBooks = async () => {
-
+        let apiUrl = `${SERVER}/books`
         try {
-
+            const response = await axios.get(apiUrl);
+            console.log(response.data)
+            this.setState({ createdBooks: response.data });
         } catch (err) {
             console.error(err)
         }
@@ -62,25 +74,40 @@ class Bookshelf extends React.Component {
 
                 <VStack>
 
-                    {this.state.authenticatedTemp ?
+                    {this.props.auth0.isAuthenticated ?
                         <>
-                            {this.state.createdBook.length > 0 ?
+                            {this.state.createdBooks.length > 0 ?
                                 <>
-                                    <Container maxW='100'>
-                                        <Carousel
+                                    <Container>
+                                        {/* <Carousel
                                             className='text-center'
                                             activeIndex={this.state.index}
                                             onSelect={this.handleSelectCarousel}
-                                        >
-                                            <Carousel.Item>
-                                                <img></img>
-                                                <Carousel.Caption>
-                                                    page sentence here
-                                                </Carousel.Caption>
-                                            </Carousel.Item>
-                                            {/* insert map that will map pages of the book when created */}
+                                        > */}
+                                        {this.state.createdBooks.map(book => {
+                                            return <Card style={{ textAlign: 'center' }}>
+                                                <Center>
+                                                    <Card.Img variant='top' src='https://picsum.photos/1'
+                                                        style={{ width: '200px', height: '200px' }} />
+                                                </Center>
+                                                <Card.Body>
+                                                    <Card.Title>{book.title}</Card.Title>
+                                                    <Book
+                                                        book={book} />
+                                                </Card.Body>
 
-                                        </Carousel>
+                                            </Card>
+                                        })}
+                                        {/* <Carousel.Item>
+                                                <img
+                                                    alt=''></img>
+                                                <Carousel.Caption>
+                                                    { }
+                                                </Carousel.Caption>
+                                            </Carousel.Item> */}
+                                        {/* insert map that will map pages of the book when created */}
+                                        {/* 
+                                        </Carousel> */}
                                     </Container>
                                 </>
                                 :
@@ -97,8 +124,10 @@ class Bookshelf extends React.Component {
 
                         </>
                         :
-                        <p>login component</p>
-                        // insert login component here 
+                        <>
+                            <h2>Login to create a story</h2>
+                            {/* < /> */}
+                        </>
                     }
 
                 </VStack>
