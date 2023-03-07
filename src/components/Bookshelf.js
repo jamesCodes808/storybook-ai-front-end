@@ -4,14 +4,15 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, VStack, Center } from '@chakra-ui/react';
 import Card from 'react-bootstrap/Card';
-// import Button from 'react-bootstrap/Button';
+
+import Button from 'react-bootstrap/Button';
+import { motion } from 'framer-motion';
 
 import CreateBook from './CreateBook';
 import Book from './Book';
 // import Login from '../Auth/Login';
 
 const SERVER = process.env.REACT_APP_SERVER;
-
 
 class Bookshelf extends React.Component {
 
