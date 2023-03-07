@@ -14,7 +14,7 @@ import {
   } from '@chakra-ui/react';
   import { Link as ReactLink } from 'react-router-dom';
   import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-  import { MdLocalDrink } from 'react-icons/md';
+  import { GiBookshelf } from 'react-icons/gi';
   
   const links = [
     { linkName: 'Bookshelf', path: '/bookshelf' },
@@ -41,7 +41,7 @@ import {
     const { isOpen, onClose, onOpen } = useDisclosure();
     const { colorMode, toggleColorMode } = useColorMode();
     return (
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} style={{zIndex: 10, position: 'sticky'}} >
         <Flex h={16} alignItems='center' justifyContent='space-between'>
           <IconButton
             size='md'
@@ -53,7 +53,7 @@ import {
             <Link as={ReactLink} to='/'>
               <Flex alignItems='center'>
                 {/* Icon goes here */}
-                {/* <Icon as={MdLocalDrink} h={6} w={6} color='orange.400' /> */}
+                <Icon as={GiBookshelf} h={6} w={6} color='orange.400' />
                 <Text fontWeight='extrabold'>StoryBook-AI</Text>
               </Flex>
             </Link>
