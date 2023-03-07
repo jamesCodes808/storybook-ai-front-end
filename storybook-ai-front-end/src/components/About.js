@@ -4,21 +4,29 @@ import "./About.css";
 import myPhoto from "./headshot.png";
 import coCreatorPhoto from "./headshot.png";
 import teamMemberPhoto from "./headshot.png";
-import { library } from '@fortawesome/fontawesome-svg-core'
+import GithubAbout from "./GithubAbout";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFontAwesome, faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import {
+  faFontAwesome,
+  faTwitter,
+  faGithub,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 
-library.add( faTwitter, faFontAwesome, faGithub, faLinkedin )
-
+library.add(faTwitter, faFontAwesome, faGithub, faLinkedin);
 
 class Profile extends Component {
-
   render() {
     return (
       <Container className="my-5 profile-container ">
         <h2 className="about-us-heading text-center mb-4">About Us</h2>
         <Row className="justify-content-center align-items-center grow box">
-          <Col xs={12} md={6} className="mb-4 justify-content-center align-items-center">
+          <Col
+            xs={12}
+            md={6}
+            className="mb-4 justify-content-center align-items-center"
+          >
             <Image src={myPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6}>
@@ -30,19 +38,30 @@ class Profile extends Component {
             </p>
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-twitter" />{"Twitter"}
+                <FontAwesomeIcon icon="fa-brands fa-twitter" />
+                {"Twitter"}
               </a>
               <a href="https://www.linkedin.com/in/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-linkedin" />{"LinkedIn"}
+                <FontAwesomeIcon icon="fa-brands fa-linkedin" />
+                {"LinkedIn"}
               </a>
               <a href="https://github.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-github" />{"Github"}
+                <FontAwesomeIcon icon="fa-brands fa-github" />
+                {"Github"}
               </a>
             </div>
+            <img
+              src="https://ghchart.rshah.org/HEXCOLORCODE/reedoooo"
+              alt="Name Your Github chart"
+            />
           </Col>
         </Row>
         <Row className="justify-content-center align-items-center grow box ">
-          <Col xs={12} md={6} className="mb-4 order-md-2 justify-content-center align-items-center">
+          <Col
+            xs={12}
+            md={6}
+            className="mb-4 order-md-2 justify-content-center align-items-center"
+          >
             <Image src={coCreatorPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6} className="order-md-1">
@@ -55,15 +74,22 @@ class Profile extends Component {
             </p>
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-twitter" />{"Twitter"}
+                <FontAwesomeIcon icon="fa-brands fa-twitter" />
+                {"Twitter"}
               </a>
               <a href="https://www.linkedin.com/in/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-linkedin" />{"LinkedIn"}
+                <FontAwesomeIcon icon="fa-brands fa-linkedin" />
+                {"LinkedIn"}
               </a>
               <a href="https://github.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-github" />{"Github"}
+                <FontAwesomeIcon icon="fa-brands fa-github" />
+                {"Github"}
               </a>
             </div>
+            <img
+              src="https://ghchart.rshah.org/HEXCOLORCODE/jamesCodes808"
+              alt="Name Your Github chart"
+            />
           </Col>
         </Row>
         <Row className="justify-content-center align-items-center grow box">
@@ -80,15 +106,22 @@ class Profile extends Component {
             </p>
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-twitter" />{"Twitter"}
+                <FontAwesomeIcon icon="fa-brands fa-twitter" />
+                {"Twitter"}
               </a>
               <a href="https://www.linkedin.com/in/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-linkedin" />{"LinkedIn"}
+                <FontAwesomeIcon icon="fa-brands fa-linkedin" />
+                {"LinkedIn"}
               </a>
               <a href="https://github.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-github" />{"Github"}
+                <FontAwesomeIcon icon="fa-brands fa-github" />
+                {"Github"}
               </a>
             </div>
+            <img
+              src="https://ghchart.rshah.org/HEXCOLORCODE/Sheldon-Pierce"
+              alt="Name Your Github chart"
+            />
           </Col>
         </Row>
         <Row className="justify-content-center align-items-center grow box">
@@ -105,14 +138,28 @@ class Profile extends Component {
             </p>
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-twitter" />{"Twitter"}
+                <FontAwesomeIcon icon="fa-brands fa-twitter" />
+                {"Twitter"}
               </a>
               <a href="https://www.linkedin.com/in/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-linkedin" />{"LinkedIn"}
+                <FontAwesomeIcon icon="fa-brands fa-linkedin" />
+                {"LinkedIn"}
               </a>
               <a href="https://github.com/reedvogt">
-                <FontAwesomeIcon icon="fa-brands fa-github" />{"Github"}
+                <FontAwesomeIcon icon="fa-brands fa-github" />
+                {"Github"}
               </a>
+            </div>
+            <img
+              src="https://ghchart.rshah.org/HEXCOLORCODE/ekalbers"
+              alt="Name Your Github chart"
+            />
+          </Col>
+        </Row>
+        <Row className="justify-content-center align-items-center grow box">
+          <Col xs={12} md={6} className="order-md-1">
+            <div>
+              <GithubAbout />
             </div>
           </Col>
         </Row>
