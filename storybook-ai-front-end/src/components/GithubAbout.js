@@ -4,6 +4,8 @@ import { Octokit } from "@octokit/rest";
 // access token
 const octokit = new Octokit({
   auth: process.env.REACT_APP_ACCESS_TOKEN,
+  // redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+  // client_id: process.env.CLIENT_SECRET,
 });
 
 const styles = {
