@@ -15,6 +15,7 @@ import {
   import { Link as ReactLink } from 'react-router-dom';
   import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
   import { GiBookshelf } from 'react-icons/gi';
+  import { useAuth0 } from '@auth0/auth0-react';
   
   const links = [
     { linkName: 'Bookshelf', path: '/bookshelf' },
