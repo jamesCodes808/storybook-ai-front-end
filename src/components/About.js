@@ -2,11 +2,11 @@ import { Component } from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
 import './About.css';
-
+import sheldon from './face.jpg'
 import myPhoto from './headshot.png';
 import coCreatorPhoto from './headshot.png';
 import teamMemberPhoto from './headshot.png';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaCentercode, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -49,7 +49,7 @@ class About extends Component {
           </Row>
           <Row className='justify-content-center align-items-center'>
             <Col xs={12} md={6} className='mb-4 order-md-2'>
-              <Image src={coCreatorPhoto} fluid className='profile-image' />
+              <Image src={sheldon} fluid className='profile-image' />
             </Col>
             <Col xs={12} md={6} className='order-md-1'>
               <h3 className='profile-name'>Team Member 2</h3>
