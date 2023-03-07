@@ -9,15 +9,17 @@ import {
     useDisclosure,
     Button
 } from '@chakra-ui/react';
+import DeleteBook from './DeleteBook';
 
 const Book = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const book = props.book;
+    const deleteBook = props.deleteBook;
 
+    console.log(book)
 
     return (
         <>
-
             <Button onClick={onOpen}>Expand</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -33,9 +35,15 @@ const Book = (props) => {
                             colorScheme='blue'
                             mr={3}
                             onClick={onClose}>Close</Button>
-                        <Button>
+                        <Button
+                            mr={3}>
                             Edit story
                         </Button>
+
+                        <DeleteBook
+                            deleteBook={deleteBook}
+                            book={book}
+                        />
                     </ModalFooter>
                 </ModalContent>
             </Modal>
