@@ -17,7 +17,6 @@ const CreateBook = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const postBook = props.postBook;
 
-    console.log(isOpen)
 
     const handleSubmitCreateBook = (e) => {
         e.preventDefault();

@@ -69,6 +69,7 @@ class Bookshelf extends React.Component {
     }
 
     render() {
+        console.log(this.props.auth0)
         return (
             <>
 
@@ -76,6 +77,7 @@ class Bookshelf extends React.Component {
 
                     {this.props.auth0.isAuthenticated ?
                         <>
+                            {/* <img src={this.props.auth0.user.picture}></img> */}
                             {this.state.createdBooks.length > 0 ?
                                 <>
                                     <Container>
