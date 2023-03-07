@@ -1,8 +1,6 @@
 import { Component } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
-
 import "./About.css";
-
 import myPhoto from "./headshot.png";
 import coCreatorPhoto from "./headshot.png";
 import teamMemberPhoto from "./headshot.png";
@@ -17,10 +15,10 @@ class Profile extends Component {
 
   render() {
     return (
-      <Container className="my-5 profile-container">
+      <Container className="my-5 profile-container ">
         <h2 className="about-us-heading text-center mb-4">About Us</h2>
-        <Row className="justify-content-center align-items-center">
-          <Col xs={12} md={6} className="mb-4">
+        <Row className="justify-content-center align-items-center grow box">
+          <Col xs={12} md={6} className="mb-4 justify-content-center align-items-center">
             <Image src={myPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6}>
@@ -43,12 +41,12 @@ class Profile extends Component {
             </div>
           </Col>
         </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col xs={12} md={6} className="mb-4 order-md-2">
+        <Row className="justify-content-center align-items-center grow box ">
+          <Col xs={12} md={6} className="mb-4 order-md-2 justify-content-center align-items-center">
             <Image src={coCreatorPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6} className="order-md-1">
-            <h3 className="profile-name">Team Member 2</h3>
+            <h3 className="profile-name">James Solima</h3>
             <p className="profile-description">
               Hi, I'm also a member of the development team and I'm passionate
               about creating user-friendly and accessible applications. I have
@@ -68,12 +66,12 @@ class Profile extends Component {
             </div>
           </Col>
         </Row>
-        <Row className="justify-content-center align-items-center">
+        <Row className="justify-content-center align-items-center grow box">
           <Col xs={12} md={6} className="mb-4">
             <Image src={teamMemberPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6}>
-            <h3 className="profile-name">Team Member 3</h3>
+            <h3 className="profile-name">Sheldon Pierce</h3>
             <p className="profile-description">
               Hi, I'm a member of the development team and I'm passionate about
               creating innovative solutions using cutting-edge technologies. I'm
@@ -93,12 +91,12 @@ class Profile extends Component {
             </div>
           </Col>
         </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col xs={12} md={6} className="mb-4">
+        <Row className="justify-content-center align-items-center grow box">
+          <Col xs={12} md={6} className="order-md-1">
             <Image src={teamMemberPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6}>
-            <h3 className="profile-name">Team Member 4</h3>
+            <h3 className="profile-name">Ethan Albers</h3>
             <p className="profile-description">
               Hi, I'm a member of the development team and I'm passionate about
               creating innovative solutions using cutting-edge technologies. I'm

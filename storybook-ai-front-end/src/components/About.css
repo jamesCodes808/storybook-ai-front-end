@@ -11,6 +11,7 @@
 
 .profile-name {
     margin-bottom: 10px;
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
     color: #333;
@@ -54,6 +55,15 @@
     letter-spacing: 2px;
 }
 
+img {
+    margin: auto;
+    margin-top: 20px;
+}
+
+.mb-4 {
+    margin-top: 1.5rem !important;
+}
+
 @media (max-width: 767px) {
     .about-us-heading {
         font-size: 24px;
@@ -94,6 +104,7 @@
     color: #212529;
     transform: scale(1.2);
 }
+
 .profile-social-links a {
     color: #777;
     font-size: 1.2rem;
@@ -105,4 +116,31 @@
 
 .profile-social-links a svg {
     margin-right: 0.5rem;
+}
+
+.grow {
+    /* transition-delay: 3s; */
+    transition-property: ease-in-out;
+    transition-duration: 10s;
+    transition-timing-function: linear;
+    transition-delay: 5s;
+    /* transition-property: cubic-bezier(0.4, 0, 1, 1); */
+}
+
+.grow:hover {
+    transform: scale(1.1);
+    /* transition-delay: 5s; */
+}
+
+.box {
+    transition: box-shadow .3s;
+    margin: 50px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+
+}
+
+.box:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
 }

@@ -1,19 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import "./App.css";
 
-import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
-import Bookshelf from './components/Bookshelf';
-import Login from './Auth/Login'
-import Logout from './Auth/Logout'
+import About from "./components/About";
 
-import Landingpage from './components/Landingpage';
-import { Footer } from './components/Footer';
+import Bookshelf from "./components/Bookshelf";
+import Login from "./Auth/Login";
+import Logout from "./Auth/Logout";
 
-
-
+import Landingpage from "./components/Landingpage";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -22,28 +21,15 @@ function App() {
         <Navbar />
         <main>
           <Routes>
+            <Route path="/bookshelf" element={<Bookshelf />}></Route>
 
+            <Route path="/login" element={<Login />}></Route>
 
-            <Route
-              path="/bookshelf"
-              element={<Bookshelf />} >
+            <Route path="/logout" element={<Logout />}></Route>
 
-            </Route>
-
-            <Route
-              path='/login'
-              element={<Login />} >
-            </Route>
-
-            <Route
-              path='/logout'
-              element={<Logout />} >
-            </Route>
-
-
-            <Route path='/' element={<Landingpage />}></Route>
-            {/* <Route path='/about' element={<Aboutpage />}></Route> */}
-
+            <Route path="/" element={<Landingpage />}></Route>
+            
+            <Route path='/about' element={<About />}></Route>
           </Routes>
         </main>
         <Footer />
