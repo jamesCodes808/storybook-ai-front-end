@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { Octokit } from "@octokit/rest";
+import "./GithubAbout.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFontAwesome,
+  faTwitter,
+  faGithub,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+import { Col, Row } from "react-bootstrap";
 
-// access token
-const octokit = new Octokit({
-  auth: process.env.REACT_APP_ACCESS_TOKEN,
-});
+library.add(faTwitter, faFontAwesome, faGithub, faLinkedin);
 
 const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
   header: {
     fontSize: "36px",
     fontWeight: "bold",
@@ -26,16 +28,11 @@ const styles = {
     fontSize: "18px",
     marginBottom: "5px",
   },
-  card: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: "20px",
-  },
 };
 
 class GithubAbout extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: null,
       error: null,
@@ -47,13 +44,14 @@ class GithubAbout extends Component {
     try {
       this.setState({ loading: true });
 
-      // Retrieve user information for multiple users
-      const users = ["reedoooo", "jamesCodes808", "Sheldon-Pierce", "ekalber"];
+      const octokit = new Octokit({
+        auth: process.env.REACT_APP_ACCESS_TOKEN,
+      });
 
       const data = await Promise.all(
-        users.map(async (user) => {
+        this.props.users.map(async (user) => {
           const userResponse = await octokit.rest.users.getByUsername({
-            username: user,
+            username: user.username,
           });
           return userResponse.data;
         })
@@ -68,7 +66,7 @@ class GithubAbout extends Component {
   }
 
   render() {
-    const { data, error, loading } = this.state;
+    const { error, loading } = this.state;
 
     if (loading) {
       return <p>Loading...</p>;
@@ -78,64 +76,61 @@ class GithubAbout extends Component {
       return <p>{error}</p>;
     }
 
-    if (!data) {
+    if (!this.props.users) {
       return null;
     }
 
+
     return (
-      <div style={styles.container}>
-        {data.map((user) => (
-          <div key={user.id} style={styles.card}>
-            <img
-              src={user.avatar_url}
-              alt={`${user.login} avatar`}
-              style={{ width: "50px", height: "50px", marginRight: "10px" }}
-            />
-            <div>
-              <h2 style={styles.header}>{user.name || user.login}</h2>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ ...styles.item }}>
-                  <strong>Company: </strong>
-                  {user.company || "N/A"}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Blog: </strong>
-                  {user.blog || "N/A"}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Location: </strong>
-                  {user.location || "N/A"}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Email: </strong>
-                  {user.email || "N/A"}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Bio: </strong>
-                  {user.bio || "N/A"}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Twitter: </strong>
-                  {user.twitter_username || "N/A"}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Public Repos: </strong>
-                  {user.public_repos}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Public Gists: </strong>
-                  {user.public_gists}
-                </div>
-                <div style={{ ...styles.item }}>
-                  <strong>Followers: </strong>
-                  {user.followers}
-                </div>
+      <div>
+        {this.props.users.map((user) => (
+          <div key={user.username}>
+            <Row className="align-items-center grow box">
+              <h2 style={styles.header}>{user.username}</h2>
+              <Col
+                xs={12}
+                md={6}
+                className="mb-4 order-md-2 justify-content-center align-items-center "
+              >
+                <img
+                  src={`https://github.com/${user.username}.png`}
+                  alt={`${user.username} avatar`}
+                  className="profile-image"
+                  style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                />
+                <p className="profile-description">
+                  Hi, I'm {user.username}! I'm a passionate developer who loves building
+                  websites and applications that make people's lives easier. I
+                  also love books which is why I created this app!
+                </p>
+              </Col>
+
+              <div className="profile-social-links">
+                <a href={`https://twitter.com/${user.username}`}>
+                  <FontAwesomeIcon icon={faTwitter} />
+                  {"Twitter"}
+                </a>
+                <a href={`https://www.linkedin.com/in/${user.username}`}>
+                  <FontAwesomeIcon icon={faLinkedin} />
+                  {"LinkedIn"}
+                </a>
+                <a href={`https://github.com/${user.username}`}>
+                  <FontAwesomeIcon icon={faGithub} />
+                  {"Github"}
+                </a>
               </div>
-            </div>
+
+              <img
+                src={`https://ghchart.rshah.org/HEXCOLORCODE/${user}`}
+                alt="Name Your Github chart"
+                className="contribution-chart"
+              />
+            </Row>
           </div>
         ))}
       </div>
     );
   }
 }
+
 export default GithubAbout;
