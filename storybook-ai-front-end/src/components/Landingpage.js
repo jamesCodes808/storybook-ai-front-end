@@ -6,20 +6,31 @@ import {
   Center,
   Circle,
 } from '@chakra-ui/react';
-// import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Landingpage = () => {
   return (
-    <Center h='100vh' w='100vw' bg='gray.200'>
-          <iframe title='hello' style={{width: '100vw', height: '100vh', position: 'static'}} src={'https://prosperous-nature-455718.framer.app/'} />
-      {/* <Center h='100%' w='100%' bg='tomato'> */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5, ease: 'easeOut' }}
+      exit={{ opacity: 1 }}
+    >
+      <Center h='100vh' w='99.1vw' bg='gray.200'>
+        <iframe
+          scrolling='no'
+          title='hello'
+          style={{ width: '100vw', height: '100vh', position: 'static' }}
+          src={'https://prosperous-nature-455718.framer.app/'}
+        />
+        {/* <Center h='100%' w='100%' bg='tomato'> */}
         {/* <Circle h='100%' w='100%'> */}
-            {/* hello */}
+        {/* hello */}
         {/* </Circle> */}
-      {/* </Center> */}
-    </Center>
+        {/* </Center> */}
+      </Center>
+    </motion.div>
   );
 };
 
 export default Landingpage;
-

@@ -16,6 +16,7 @@ import {
   import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
   import { GiBookshelf } from 'react-icons/gi';
   import { useAuth0 } from '@auth0/auth0-react';
+  import { AnimatePresence } from 'framer-motion';
   
   const links = [
     { linkName: 'Bookshelf', path: '/bookshelf' },
