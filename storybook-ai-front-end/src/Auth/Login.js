@@ -1,5 +1,3 @@
-import React from "react";
-import Button from 'react-bootstrap/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 
 function Login() {
@@ -9,12 +7,8 @@ function Login() {
     loginWithRedirect,
   } = useAuth0();
 
-  const handleLogin = () => {
+  return !isAuthenticated &&
     loginWithRedirect();
-  }
-
-  return ! isAuthenticated &&
-    <Button onClick={handleLogin} >Log In</Button>
 }
 
 export default Login

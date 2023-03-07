@@ -1,5 +1,3 @@
-import React from "react";
-import Button from 'react-bootstrap/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 
 function Logout() {
@@ -10,11 +8,11 @@ function Logout() {
   } = useAuth0();
 
   const handleLogout = () => {
-    logout({returnTo: window.location.origin});
+    logout({ returnTo: window.location.origin });
   }
 
   return isAuthenticated &&
-    <Button onClick={handleLogout} >Log Out</Button>
+    handleLogout()
 }
 
 export default Logout;
