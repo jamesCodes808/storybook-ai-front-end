@@ -7,6 +7,27 @@
 - Ethan Albers
 - Reed Vogt
 
+## User Stories
+
+<details closed> <summary> User Stories </summary>
+
+As a user I want to see an easy to navigate website so that I can find out what I need to do and where to go
+
+As a user I want to be able to create books for my child that are customized to a story that they can help create and will love
+
+As a user I want there to be visuals in the stories so that me and my child can have visual stimulation 
+
+As a user I want to be able to edit the books that I created and delete the ones I don't like so that I have a customized bookshelf
+
+As a user I want to be able to only see my books and not let other users see my books so that I can have privacy
+
+</details>
+
+## Domain Model
+
+![WRRC v1.0](storybook-ai-front-end/assets/wrrc.png)
+
+
 ## Cooperation Plan
 
 <details closed> <summary> Coop Plan </summary>
