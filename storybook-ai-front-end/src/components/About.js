@@ -5,6 +5,7 @@ import myPhoto from "./headshot.png";
 import coCreatorPhoto from "./headshot.png";
 import teamMemberPhoto from "./headshot.png";
 import GithubAbout from "./GithubAbout";
+import GitApi from "./GitApi";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,15 +17,23 @@ import {
 
 library.add(faTwitter, faFontAwesome, faGithub, faLinkedin);
 
+
+
 class Profile extends Component {
   render() {
     return (
       <Container className="my-5 profile-container ">
         <h2 className="about-us-heading text-center mb-4">About Us</h2>
+
         <Row className="justify-content-center align-items-center grow box">
+          <Col xs={12} md={3}>
+            <div>
+              <GitApi />
+            </div>
+          </Col>
           <Col
             xs={12}
-            md={6}
+            md={3}
             className="mb-4 justify-content-center align-items-center"
           >
             <Image src={myPhoto} fluid className="profile-image" />
@@ -56,15 +65,9 @@ class Profile extends Component {
             />
           </Col>
         </Row>
+
         <Row className="justify-content-center align-items-center grow box ">
-          <Col
-            xs={12}
-            md={6}
-            className="mb-4 order-md-2 justify-content-center align-items-center"
-          >
-            <Image src={coCreatorPhoto} fluid className="profile-image" />
-          </Col>
-          <Col xs={12} md={6} className="order-md-1">
+          <Col xs={12} md={6} className="img-col">
             <h3 className="profile-name">James Solima</h3>
             <p className="profile-description">
               Hi, I'm also a member of the development team and I'm passionate
@@ -91,9 +94,27 @@ class Profile extends Component {
               alt="Name Your Github chart"
             />
           </Col>
+          <Col
+            xs={12}
+            md={3}
+            className="mb-4 justify-content-center align-items-center"
+          >
+            <Image src={coCreatorPhoto} fluid className="profile-image" />
+          </Col>
+          <Col xs={12} md={3}>
+            <div>
+              <GitApi />
+            </div>
+          </Col>
         </Row>
+
         <Row className="justify-content-center align-items-center grow box">
-          <Col xs={12} md={6} className="mb-4">
+          <Col xs={12} md={3}>
+            <div>
+              <GitApi />
+            </div>
+          </Col>
+          <Col xs={12} md={3} className="mb-4">
             <Image src={teamMemberPhoto} fluid className="profile-image" />
           </Col>
           <Col xs={12} md={6}>
@@ -124,11 +145,9 @@ class Profile extends Component {
             />
           </Col>
         </Row>
-        <Row className="justify-content-center align-items-center grow box">
-          <Col xs={12} md={6} className="order-md-1">
-            <Image src={teamMemberPhoto} fluid className="profile-image" />
-          </Col>
-          <Col xs={12} md={6}>
+
+        <Row className="justify-content-center justify-content-space-around align-items-center grow box">
+          <Col xs={12} md={6} style={{ float: "right" }}>
             <h3 className="profile-name">Ethan Albers</h3>
             <p className="profile-description">
               Hi, I'm a member of the development team and I'm passionate about
@@ -155,9 +174,21 @@ class Profile extends Component {
               alt="Name Your Github chart"
             />
           </Col>
+          <Col xs={12} md={3} className="img-col">
+            <Image src={teamMemberPhoto} fluid className="profile-image" />
+          </Col>
+          <Col xs={12} md={3}>
+            <div>
+              <GitApi />
+            </div>
+          </Col>
         </Row>
-        <Row className="justify-content-center align-items-center grow box">
-          <Col xs={12} md={6} className="order-md-1">
+
+        <Row
+          className="justify-content-center align-items-center grow box"
+          style={{ right: "0" }}
+        >
+          <Col xs={12} md={4} className="order-md-1">
             <div>
               <GithubAbout />
             </div>
