@@ -17,7 +17,7 @@ import { Link as ReactLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { GiBookshelf } from 'react-icons/gi';
 import { useAuth0 } from '@auth0/auth0-react';
-import { AnimatePresence } from 'framer-motion';
+// import { AnimatePresence } from 'framer-motion';
 
 const links = [
   { linkName: 'Bookshelf', path: '/bookshelf' },
@@ -90,6 +90,7 @@ const Navbar = () => {
               <Circle size='40px'>
                 <img
                   src={user.picture}
+                  alt='user'
                   style={{ borderRadius: '20px' }}></img>
               </Circle>
             </>
