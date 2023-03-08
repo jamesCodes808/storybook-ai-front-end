@@ -7,6 +7,7 @@ import {
   Circle,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+// import {  } from 'framer-motion'
 
 const Landingpage = () => {
   return (
@@ -16,12 +17,12 @@ const Landingpage = () => {
       transition={{ duration: 1.5, ease: 'easeOut' }}
       exit={{ opacity: 1 }}
     >
-      <Center h='100vh' w='99.1vw' bg='gray.200'>
+      <Center h='70.5vh' w='100vw' bg='gray.200'>
         <iframe
           scrolling='no'
           title='hello'
-          style={{ width: '100vw', height: '100vh', position: 'static' }}
-          src={'https://prosperous-nature-455718.framer.app/'}
+          style={{ width: '100vw', height: '80vh', position: 'static' }}
+          src={'https://start-wring-042927.framer.app/'}
         />
         {/* <Center h='100%' w='100%' bg='tomato'> */}
         {/* <Circle h='100%' w='100%'> */}

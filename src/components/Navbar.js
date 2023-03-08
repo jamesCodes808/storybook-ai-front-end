@@ -11,7 +11,7 @@ import {
   Stack,
   useColorModeValue,
   useColorMode,
-  Circle
+  Circle,
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
@@ -45,7 +45,11 @@ const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { user, isAuthenticated } = useAuth0();
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} style={{ zIndex: 10, position: 'sticky' }} >
+    <Box
+      bg={useColorModeValue('gray.100', 'gray.900')}
+      px={4}
+      style={{ zIndex: 10, position: 'sticky' }}
+    >
       <Flex h={16} alignItems='center' justifyContent='space-between'>
         <IconButton
           size='md'
@@ -77,25 +81,29 @@ const Navbar = () => {
               onClick={() => toggleColorMode()}
             ></Icon>
           </NavLink>
-          {isAuthenticated ?
-            <>            <Button
-              as={ReactLink}
-              to='/logout'
-              p={2}
-              fontSize='sm'
-              fontWeight={400}
-              variant='link'>
-              Sign Out
-            </Button>
+          {isAuthenticated ? (
+            <>
+              {' '}
+              <Button
+                as={ReactLink}
+                to='/logout'
+                p={2}
+                fontSize='sm'
+                fontWeight={400}
+                variant='link'
+              >
+                Sign Out
+              </Button>
               <Circle size='40px'>
+
                 <img
                   src={user.picture}
                   alt='user'
                   style={{ borderRadius: '20px' }}></img>
+
               </Circle>
             </>
-
-            :
+          ) : (
             <Button
               as={ReactLink}
               to='/login'
@@ -105,9 +113,10 @@ const Navbar = () => {
               variant='link'
             >
               Sign In
-            </Button>}
+            </Button>
+          )}
 
-          <Button
+          {/* <Button
             as={ReactLink}
             to='/registration'
             m={2}
@@ -119,7 +128,7 @@ const Navbar = () => {
             color='white'
           >
             Sign Up
-          </Button>
+          </Button> */}
         </Flex>
       </Flex>
       {isOpen ? (
@@ -130,9 +139,9 @@ const Navbar = () => {
                 {link.linkName}
               </NavLink>
             ))}
-            <NavLink key='sign up' path='/registration'>
+            {/* <NavLink key='sign up' path='/registration'>
               Sign Up
-            </NavLink>
+            </NavLink> */}
           </Stack>
         </Box>
       ) : null}

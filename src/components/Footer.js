@@ -40,7 +40,8 @@ export const Footer = () => (
             />
             <IconButton
               as='a'
-              href='#'
+              target={'_blank'}
+              href='https://github.com/jamesCodes808/storybook-ai-front-end'
               aria-label='GitHub'
               icon={<FaGithub fontSize='1.25rem' />}
             />

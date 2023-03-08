@@ -85,8 +85,10 @@ class Bookshelf extends React.Component {
 
       this.setState({ createdBooks: booksResponse.data });
 
+
     }
   }
+
 
 
 
@@ -103,6 +105,7 @@ class Bookshelf extends React.Component {
     const res = await this.props.auth0.getIdTokenClaims();
 
     const jwt = res.__raw;
+
 
     const config = {
       headers: { "Authorization": `Bearer ${jwt}` },
@@ -140,15 +143,16 @@ class Bookshelf extends React.Component {
   
       this.setState({ createdBooks: booksResponse.data }); */
 
+
     }
   };
+
 
   render() {
     console.log(this.props.auth0);
     return (
       <>
         <VStack>
-          {/* insert books and create book button style this to align on the right side of the page*/}
 
 
           {this.props.auth0.isAuthenticated ? (
@@ -215,5 +219,6 @@ class Bookshelf extends React.Component {
     );
   }
 }
+
 
 export default withAuth0(Bookshelf);
