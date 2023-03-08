@@ -173,7 +173,7 @@ class Bookshelf extends React.Component {
                             <CardBody>
                               <Center>
                                 <Image
-                                  src={book.cover}
+                                  src={`data:image /png;base64, ${book.cover}`}
                                   alt='book cover'
                                 />
                               </Center>
