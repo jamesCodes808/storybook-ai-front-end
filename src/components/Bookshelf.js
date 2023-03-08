@@ -76,7 +76,7 @@ class Bookshelf extends React.Component {
             this.setState({ createdBooks: booksResponse.data });
 
         }
-
+      }
 
 
   updateBook = async () => {
@@ -109,7 +109,7 @@ class Bookshelf extends React.Component {
         }
     };
 
-    async componentDidMount() {
+     componentDidMount = async ()=> {
 
         if (this.props.auth0.isAuthenticated) {
             this.getBooks();
@@ -130,7 +130,7 @@ class Bookshelf extends React.Component {
             this.setState({ createdBooks: booksResponse.data }); */
 
         }
-    }
+    };
 
 
   render() {
@@ -138,7 +138,6 @@ class Bookshelf extends React.Component {
     return (
       <>
         <VStack>
-          {/* insert books and create book button style this to align on the right side of the page*/}
 
 
           {this.props.auth0.isAuthenticated ? (
@@ -204,5 +203,6 @@ class Bookshelf extends React.Component {
     );
   }
 }
+
 
 export default withAuth0(Bookshelf);
