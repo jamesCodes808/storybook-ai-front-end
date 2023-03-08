@@ -41,13 +41,33 @@ class Bookshelf extends React.Component {
     };
 
     getBooks = async () => {
-        let apiUrl = `${SERVER}/books`
+        /* let apiUrl = `${SERVER}/books`
+
         try {
             const response = await axios.get(apiUrl);
             console.log(response.data)
             this.setState({ createdBooks: response.data });
         } catch (err) {
             console.error(err)
+        } */
+
+        if (this.props.auth0.isAuthenticated) {
+
+            const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}` },
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/books'
+            }
+
+            const booksResponse = await axios(config);
+
+            this.setState({ createdBooks: booksResponse.data });
+
         }
     };
 
@@ -60,9 +80,19 @@ class Bookshelf extends React.Component {
     };
 
     deleteBook = async (id) => {
-        let apiUrl = `${SERVER}/books/${id}`
+        const res = await this.props.auth0.getIdTokenClaims();
+
+        const jwt = res.__raw;
+
+        const config = {
+            headers: { "Authorization": `Bearer ${jwt}` },
+            method: 'delete',
+            baseURL: process.env.REACT_APP_SERVER,
+            url: `/books/${id}`
+        }
+
         try {
-            const response = await axios.delete(apiUrl)
+            const response = await axios(config)
             console.log(response.data)
             this.getBooks()
         } catch (err) {
@@ -70,9 +100,28 @@ class Bookshelf extends React.Component {
         }
     };
 
-    componentDidMount() {
-        this.getBooks();
-    };
+    async componentDidMount() {
+
+        if (this.props.auth0.isAuthenticated) {
+            this.getBooks();
+
+            /* const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}` },
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/books'
+            }
+
+            const booksResponse = await axios(config);
+
+            this.setState({ createdBooks: booksResponse.data }); */
+
+        }
+    }
 
     render() {
         console.log(this.props.auth0)
