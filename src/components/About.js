@@ -6,8 +6,9 @@ import sheldon from './face.jpg'
 import myPhoto from './headshot.png';
 import coCreatorPhoto from './headshot.png';
 import teamMemberPhoto from './headshot.png';
-import { FaCentercode, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useColorModeValue } from '@chakra-ui/react';
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faFontAwesome, faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -52,23 +53,16 @@ class About extends Component {
               <Image src={sheldon} fluid className='profile-image' />
             </Col>
             <Col xs={12} md={6} className='order-md-1'>
-              <h3 className='profile-name'>Team Member 2</h3>
+              <h3 className='profile-name'>Sheldon Pierce</h3>
               <p className='profile-description'>
-                Hi, I'm also a member of the development team and I'm passionate
-                about creating user-friendly and accessible applications. I have
-                experience in frontend development and design, and I'm excited
-                to contribute my skills to this project.
+                Hello, Sheldon here! I am a forward thinking, customer focused developer based in Seattle, WA. I love making functional apps that can be used by everyone. You can catch me snowboarding or hiking in my free time!
               </p>
               <div className='profile-social-links'>
-                <a href='https://twitter.com/reedvogt'>
-                  <FaTwitter icon='fa-brands fa-twitter' />
-                  {'Twitter'}
-                </a>
-                <a href='https://www.linkedin.com/in/reedvogt'>
+                <a target='_blank' href='https://www.linkedin.com/in/sheldon-pierce/' rel='noreferrer'>
                   <FaLinkedin icon='fa-brands fa-linkedin' />
                   {'LinkedIn'}
                 </a>
-                <a href='https://github.com/reedvogt'>
+                <a target='_blank' href='https://github.com/Sheldon-Pierce' rel='noreferrer'>
                   <FaGithub icon='fa-brands fa-github' />
                   {'Github'}
                 </a>
