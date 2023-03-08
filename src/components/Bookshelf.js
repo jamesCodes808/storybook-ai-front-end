@@ -4,9 +4,15 @@ import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, VStack, Center } from '@chakra-ui/react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion';
-
+import { Link as ReactLink } from 'react-router-dom';
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react';
 
 import CreateBook from './CreateBook';
 import Book from './Book';
@@ -15,6 +21,7 @@ import Book from './Book';
 const SERVER = process.env.REACT_APP_SERVER;
 
 class Bookshelf extends React.Component {
+
 
     constructor() {
         super()
@@ -69,15 +76,17 @@ class Bookshelf extends React.Component {
             this.setState({ createdBooks: booksResponse.data });
 
         }
-    };
 
-    updateBook = async () => {
-        try {
 
-        } catch (err) {
-            console.error(err)
-        }
-    };
+
+  updateBook = async () => {
+    try {
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
 
     deleteBook = async (id) => {
         const res = await this.props.auth0.getIdTokenClaims();
@@ -123,64 +132,77 @@ class Bookshelf extends React.Component {
         }
     }
 
-    render() {
-        console.log(this.props.auth0)
-        return (
+
+  render() {
+    console.log(this.props.auth0);
+    return (
+      <>
+        <VStack>
+          {/* insert books and create book button style this to align on the right side of the page*/}
+
+
+          {this.props.auth0.isAuthenticated ? (
             <>
-
-                <VStack>
-
-                    {/* insert books and create book button style this to align on the right side of the page*/}
-
-                    {this.props.auth0.isAuthenticated ?
-                        <>
-                            <Container>
-                                <CreateBook
-                                    postBook={this.postBook}
-                                    test={this.state.sampleProp} />
-                            </Container>
-                            {this.state.createdBooks.length > 0 ?
-                                <>
-                                    <Container>
-
-                                        {this.state.createdBooks.map(book => {
-                                            return <Card style={{ textAlign: 'center' }}>
-                                                <Center>
-                                                    <Card.Img variant='top' src='https://picsum.photos/1'
-                                                        style={{ width: '200px', height: '200px' }} />
-                                                </Center>
-                                                <Card.Body>
-                                                    <Card.Title>{book.title}</Card.Title>
-                                                    <Book
-                                                        book={book}
-                                                        deleteBook={this.deleteBook} />
-                                                </Card.Body>
-
-                                            </Card>
-                                        })}
-
-                                    </Container>
-                                </>
-                                :
-                                <h3>Your bookshelf is empty! Create a book now</h3>
-                            }
-
-
-
-                        </>
-                        :
-                        <>
-                            <h2>Login to create a story</h2>
-                            {/* < /> */}
-                        </>
-                    }
-
-                </VStack>
-
+              <Container>
+                <CreateBook
+                  postBook={this.postBook}
+                  test={this.state.sampleProp}
+                />
+              </Container>
+              {this.state.createdBooks.length > 0 ? (
+                <>
+                  <Container>
+                    {this.state.createdBooks.map((book) => {
+                      return (
+                        <Card style={{ textAlign: 'center' }}>
+                          <Center>
+                            <Card.Img
+                              variant='top'
+                              src='https://picsum.photos/1'
+                              style={{ width: '200px', height: '200px' }}
+                            />
+                          </Center>
+                          <Card.Body>
+                            <Card.Title>{book.title}</Card.Title>
+                            <Book book={book} deleteBook={this.deleteBook} />
+                          </Card.Body>
+                        </Card>
+                      );
+                    })}
+                  </Container>
+                </>
+              ) : (
+                <h3>Your bookshelf is empty! Create a book now</h3>
+              )}
             </>
-        )
-    }
-
+          ) : (
+            <>
+              <Alert
+                status='error'
+                variant='subtle'
+                flexDirection='column'
+                alignItems='center'
+                justifyContent='center'
+                textAlign='center'
+                height='70.5vh'
+              >
+                <AlertIcon boxSize='40px' mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize='lg'>
+                  Warning!
+                </AlertTitle>
+                <AlertDescription mb='2' maxWidth='sm'>
+                  You need to be logged in to access your bookshelf.
+                </AlertDescription>
+                <Button colorScheme='blue' as={ReactLink} to='/login'>
+                  Sign In
+                </Button>
+              </Alert>
+            </>
+          )}
+        </VStack>
+      </>
+    );
+  }
 }
 
 export default withAuth0(Bookshelf);
