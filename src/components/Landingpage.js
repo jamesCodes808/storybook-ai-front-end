@@ -6,17 +6,13 @@ import {
   Center,
   Circle,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { motion, useIsPresent } from 'framer-motion';
 // import {  } from 'framer-motion'
 
 const Landingpage = () => {
+  const isPresent = useIsPresent();
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5, ease: 'easeOut' }}
-      exit={{ opacity: 1 }}
-    >
+    <>
       <Center h='70.5vh' w='100vw' bg='gray.200'>
         <iframe
           scrolling='no'
@@ -30,7 +26,7 @@ const Landingpage = () => {
         {/* </Circle> */}
         {/* </Center> */}
       </Center>
-    </motion.div>
+    </>
   );
 };
 

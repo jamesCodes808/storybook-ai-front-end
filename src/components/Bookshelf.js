@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import { motion, useIsPresent } from "framer-motion";
 import { withAuth0 } from '@auth0/auth0-react';
 import { Container, VStack, Center, Heading, Card, CardBody, Image, Button } from '@chakra-ui/react';
 // import { motion } from 'framer-motion';
@@ -30,6 +30,7 @@ class Bookshelf extends React.Component {
       index: 0,
     }
   }
+
 
 
   postBook = async (inputData) => {
@@ -150,6 +151,7 @@ class Bookshelf extends React.Component {
 
   render() {
     console.log(this.props.auth0);
+
     return (
       <>
         <VStack>
@@ -215,6 +217,13 @@ class Bookshelf extends React.Component {
             </>
           )}
         </VStack>
+        <motion.div
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+        exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+        // style={{ originX: isPresent ? 0 : 1 }}
+        className="privacy-screen"
+      />
       </>
     );
   }

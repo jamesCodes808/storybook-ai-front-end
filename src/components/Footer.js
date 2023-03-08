@@ -52,21 +52,6 @@ export const Footer = () => (
               icon={<FaTwitter fontSize='1.25rem' />}
             />
           </ButtonGroup>
-          <Flex spacing='4'>
-            <Text fontSize='sm' fontWeight='semibold' color='subtle' >
-              Stay up to date
-            </Text>
-            <Stack
-              spacing='4'
-              direction={{ base: 'column', sm: 'row' }}
-              maxW={{ lg: '360px' }}
-            >
-              <Input placeholder='Enter your email' type='email' required bg={useColorModeValue('white', 'gray.800')}/>
-              <Button variant='primary' type='submit' flexShrink={0} bg='blue.500' color={'white'}>
-                Subscribe
-              </Button>
-            </Stack>
-          </Flex>
         </Stack>
         <Text fontSize='sm' color='subtle'>
           &copy; {new Date().getFullYear()} StoryBook-AI, Inc. All rights
