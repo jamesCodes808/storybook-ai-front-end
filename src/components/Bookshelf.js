@@ -2,10 +2,8 @@ import React from 'react';
 import axios from 'axios';
 
 import { withAuth0 } from '@auth0/auth0-react';
-import { Container, VStack, Center } from '@chakra-ui/react';
-import Card from 'react-bootstrap/Card';
-import { Button } from '@chakra-ui/react'
-import { motion } from 'framer-motion';
+import { Container, VStack, Center, Heading, Card, CardBody, Image, Button } from '@chakra-ui/react';
+// import { motion } from 'framer-motion';
 import { Link as ReactLink } from 'react-router-dom';
 import {
   Alert,
@@ -23,60 +21,75 @@ const SERVER = process.env.REACT_APP_SERVER;
 class Bookshelf extends React.Component {
 
 
-    constructor() {
-        super()
-        this.state = {
-            authenticatedTemp: true,
-            sampleProp: 'sample prop',
-            createdBooks: [],
-            index: 0,
-        }
+  constructor() {
+    super()
+    this.state = {
+      authenticatedTemp: true,
+      sampleProp: 'sample prop',
+      createdBooks: [],
+      index: 0,
+    }
+  }
+
+
+  postBook = async (inputData) => {
+    if (this.props.auth0.isAuthenticated) {
+
+      console.log(inputData);
+
+      const res = await this.props.auth0.getIdTokenClaims();
+
+      const jwt = res.__raw;
+
+      const config = {
+        headers: { "Authorization": `Bearer ${jwt}` }
+      }
+
+      try {
+        let newBook = await axios.post(`${SERVER}/books`, inputData, config);
+        this.setState(prevState => ({ createdBooks: [...prevState.createdBooks, newBook] }));
+        this.getBooks();
+        console.log(this.state.createdBooks);
+      } catch (err) {
+        console.error(err);
+      }
     }
 
+  };
 
-    postBook = async (inputData) => {
+  getBooks = async () => {
+    /* let apiUrl = `${SERVER}/books`
+  
+    try {
+        const response = await axios.get(apiUrl);
+        console.log(response.data)
+        this.setState({ createdBooks: response.data });
+    } catch (err) {
+        console.error(err)
+    } */
 
-        console.log(inputData)
-        try {
-            let newBook = await axios.post(`${SERVER}/books`, inputData)
-            this.setState(prevState => ({ createdBooks: [...prevState.createdBooks, newBook] }));
-            this.getBooks()
-            console.log(this.state.createdBooks)
-        } catch (err) {
-            console.error(err)
-        }
-    };
+    if (this.props.auth0.isAuthenticated) {
 
-    getBooks = async () => {
-        /* let apiUrl = `${SERVER}/books`
+      const res = await this.props.auth0.getIdTokenClaims();
 
-        try {
-            const response = await axios.get(apiUrl);
-            console.log(response.data)
-            this.setState({ createdBooks: response.data });
-        } catch (err) {
-            console.error(err)
-        } */
+      const jwt = res.__raw;
 
-        if (this.props.auth0.isAuthenticated) {
-
-            const res = await this.props.auth0.getIdTokenClaims();
-
-            const jwt = res.__raw;
-
-            const config = {
-                headers: { "Authorization": `Bearer ${jwt}` },
-                method: 'get',
-                baseURL: process.env.REACT_APP_SERVER,
-                url: '/books'
-            }
-
-            const booksResponse = await axios(config);
-
-            this.setState({ createdBooks: booksResponse.data });
-
-        }
+      const config = {
+        headers: { "Authorization": `Bearer ${jwt}` },
+        method: 'get',
+        baseURL: SERVER,
+        url: '/books'
       }
+
+      const booksResponse = await axios(config);
+
+      this.setState({ createdBooks: booksResponse.data });
+
+
+    }
+  }
+
+
 
 
   updateBook = async () => {
@@ -88,49 +101,51 @@ class Bookshelf extends React.Component {
 
 
 
-    deleteBook = async (id) => {
-        const res = await this.props.auth0.getIdTokenClaims();
+  deleteBook = async (id) => {
+    const res = await this.props.auth0.getIdTokenClaims();
 
-        const jwt = res.__raw;
+    const jwt = res.__raw;
 
-        const config = {
-            headers: { "Authorization": `Bearer ${jwt}` },
-            method: 'delete',
-            baseURL: process.env.REACT_APP_SERVER,
-            url: `/books/${id}`
-        }
 
-        try {
-            const response = await axios(config)
-            console.log(response.data)
-            this.getBooks()
-        } catch (err) {
-            console.error(err)
-        }
-    };
+    const config = {
+      headers: { "Authorization": `Bearer ${jwt}` },
+      method: 'delete',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/books/${id}`
+    }
 
-     componentDidMount = async ()=> {
+    try {
+      const response = await axios(config)
+      console.log(response.data)
+      this.getBooks()
+    } catch (err) {
+      console.error(err)
+    }
+  };
 
-        if (this.props.auth0.isAuthenticated) {
-            this.getBooks();
+  async componentDidMount() {
 
-            /* const res = await this.props.auth0.getIdTokenClaims();
+    if (this.props.auth0.isAuthenticated) {
+      this.getBooks();
 
-            const jwt = res.__raw;
+      /* const res = await this.props.auth0.getIdTokenClaims();
+  
+      const jwt = res.__raw;
+  
+      const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: '/books'
+      }
+  
+      const booksResponse = await axios(config);
+  
+      this.setState({ createdBooks: booksResponse.data }); */
 
-            const config = {
-                headers: { "Authorization": `Bearer ${jwt}` },
-                method: 'get',
-                baseURL: process.env.REACT_APP_SERVER,
-                url: '/books'
-            }
 
-            const booksResponse = await axios(config);
-
-            this.setState({ createdBooks: booksResponse.data }); */
-
-        }
-    };
+    }
+  };
 
 
   render() {
@@ -155,16 +170,17 @@ class Bookshelf extends React.Component {
                       return (
                         <Card style={{ textAlign: 'center' }}>
                           <Center>
-                            <Card.Img
-                              variant='top'
-                              src='https://picsum.photos/1'
-                              style={{ width: '200px', height: '200px' }}
-                            />
+                            <CardBody>
+                              <Center>
+                                <Image
+                                  src={book.cover}
+                                  alt='book cover'
+                                />
+                              </Center>
+                              <Heading>{book.title}</Heading>
+                              <Book book={book} deleteBook={this.deleteBook} />
+                            </CardBody>
                           </Center>
-                          <Card.Body>
-                            <Card.Title>{book.title}</Card.Title>
-                            <Book book={book} deleteBook={this.deleteBook} />
-                          </Card.Body>
                         </Card>
                       );
                     })}

@@ -4,9 +4,12 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 import './About.css';
 import sheldon from './face.jpg'
 import myPhoto from './headshot.png';
-import coCreatorPhoto from './headshot.png';
+// import coCreatorPhoto from './headshot.png';
 import teamMemberPhoto from './headshot.png';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+
+// import FaCentercode from 'react-icons/fa';
+
 import { motion } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
 // import { library } from '@fortawesome/fontawesome-svg-core'
@@ -18,7 +21,7 @@ import { useColorModeValue } from '@chakra-ui/react';
 class About extends Component {
   render() {
     return (
-      <motion.div initial={{y: '100%'}} animate={{y: '0%'}} transition={{duration: 0.75, ease: 'easeIn' }} exit={{opacity: 0}}>
+      <motion.div initial={{ y: '100%' }} animate={{ y: '0%' }} transition={{ duration: 0.75, ease: 'easeIn' }} exit={{ opacity: 0 }}>
         <Container className='my-5 profile-container'>
           <h2 className='about-us-heading text-center mb-4'>About Us</h2>
           <Row className='justify-content-center align-items-center'>
