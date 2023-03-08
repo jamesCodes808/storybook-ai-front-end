@@ -21,40 +21,63 @@ import Book from './Book';
 const SERVER = process.env.REACT_APP_SERVER;
 
 class Bookshelf extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      authenticatedTemp: true,
-      sampleProp: 'sample prop',
-      createdBooks: [],
-      index: 0,
+
+
+    constructor() {
+        super()
+        this.state = {
+            authenticatedTemp: true,
+            sampleProp: 'sample prop',
+            createdBooks: [],
+            index: 0,
+        }
+    }
+
+
+    postBook = async (inputData) => {
+
+        console.log(inputData)
+        try {
+            let newBook = await axios.post(`${SERVER}/books`, inputData)
+            this.setState(prevState => ({ createdBooks: [...prevState.createdBooks, newBook] }));
+            this.getBooks()
+            console.log(this.state.createdBooks)
+        } catch (err) {
+            console.error(err)
+        }
     };
-  }
 
-  postBook = async (inputData) => {
-    console.log(inputData);
-    try {
-      let newBook = await axios.post(`${SERVER}/books`, inputData);
-      this.setState((prevState) => ({
-        createdBooks: [...prevState.createdBooks, newBook],
-      }));
-      this.getBooks();
-      console.log(this.state.createdBooks);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    getBooks = async () => {
+        /* let apiUrl = `${SERVER}/books`
 
-  getBooks = async () => {
-    let apiUrl = `${SERVER}/books`;
-    try {
-      const response = await axios.get(apiUrl);
-      console.log(response.data);
-      this.setState({ createdBooks: response.data });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+        try {
+            const response = await axios.get(apiUrl);
+            console.log(response.data)
+            this.setState({ createdBooks: response.data });
+        } catch (err) {
+            console.error(err)
+        } */
+
+        if (this.props.auth0.isAuthenticated) {
+
+            const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}` },
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/books'
+            }
+
+            const booksResponse = await axios(config);
+
+            this.setState({ createdBooks: booksResponse.data });
+
+        }
+
+
 
   updateBook = async () => {
     try {
@@ -63,20 +86,52 @@ class Bookshelf extends React.Component {
     }
   };
 
-  deleteBook = async (id) => {
-    let apiUrl = `${SERVER}/books/${id}`;
-    try {
-      const response = await axios.delete(apiUrl);
-      console.log(response.data);
-      this.getBooks();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
-  componentDidMount() {
-    this.getBooks();
-  }
+
+    deleteBook = async (id) => {
+        const res = await this.props.auth0.getIdTokenClaims();
+
+        const jwt = res.__raw;
+
+        const config = {
+            headers: { "Authorization": `Bearer ${jwt}` },
+            method: 'delete',
+            baseURL: process.env.REACT_APP_SERVER,
+            url: `/books/${id}`
+        }
+
+        try {
+            const response = await axios(config)
+            console.log(response.data)
+            this.getBooks()
+        } catch (err) {
+            console.error(err)
+        }
+    };
+
+    async componentDidMount() {
+
+        if (this.props.auth0.isAuthenticated) {
+            this.getBooks();
+
+            /* const res = await this.props.auth0.getIdTokenClaims();
+
+            const jwt = res.__raw;
+
+            const config = {
+                headers: { "Authorization": `Bearer ${jwt}` },
+                method: 'get',
+                baseURL: process.env.REACT_APP_SERVER,
+                url: '/books'
+            }
+
+            const booksResponse = await axios(config);
+
+            this.setState({ createdBooks: booksResponse.data }); */
+
+        }
+    }
+
 
   render() {
     console.log(this.props.auth0);
@@ -84,6 +139,7 @@ class Bookshelf extends React.Component {
       <>
         <VStack>
           {/* insert books and create book button style this to align on the right side of the page*/}
+
 
           {this.props.auth0.isAuthenticated ? (
             <>
