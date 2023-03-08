@@ -21,7 +21,9 @@ const Book = (props) => {
 
     return (
         <>
-            <Button onClick={onOpen}>Expand</Button>
+            <Button
+                m={4}
+                onClick={onOpen}>Expand</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
