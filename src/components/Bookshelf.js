@@ -11,7 +11,10 @@ import {
   Image,
   Button,
   SimpleGrid,
-  Box
+  Box,
+  Skeleton,
+  Progress,
+  Text,
 } from '@chakra-ui/react';
 // import { motion } from 'framer-motion';
 import { Link as ReactLink } from 'react-router-dom';
@@ -36,6 +39,7 @@ class Bookshelf extends React.Component {
       sampleProp: 'sample prop',
       createdBooks: [],
       index: 0,
+      hasBooks: true,
     };
   }
 
@@ -57,7 +61,6 @@ class Bookshelf extends React.Component {
           createdBooks: [...prevState.createdBooks, newBook],
         }));
         this.getBooks();
-
       } catch (err) {
         console.error(err);
       }
@@ -88,8 +91,12 @@ class Bookshelf extends React.Component {
       };
 
       const booksResponse = await axios(config);
-      console.log('---------From GET Method-------', booksResponse.data)
-      this.setState({ createdBooks: booksResponse.data });
+      console.log('---------From GET Method-------', booksResponse.data);
+      console.log(booksResponse)
+      
+      booksResponse.status === 200
+      ? this.setState({ hasBooks: true, createdBooks: booksResponse.data })
+      : this.setState({ hasBooks: false })
     }
   };
 
@@ -143,10 +150,9 @@ class Bookshelf extends React.Component {
   }
 
   render() {
-
+    console.log(this.state)
     return (
       <>
-
         <motion.div
           initial={{ y: '100%' }}
           animate={{ y: '0%' }}
@@ -154,24 +160,24 @@ class Bookshelf extends React.Component {
           exit={{ opacity: 1 }}
           className='absolute top-0 left-0 w-full h-full'
         >
-
           {this.props.auth0.isAuthenticated ? (
             <>
-              <Container>
+              <Container mt='30px'>
                 <CreateBook
                   postBook={this.postBook}
                   test={this.state.sampleProp}
                 />
               </Container>
 
-              {this.state.createdBooks.length > 0 ? (
+              {this.state.createdBooks.length > 0 &&
+              this.state.hasBooks === true ? (
                 <>
                   <SimpleGrid
                     // h='60vh'
                     templateColumns='repeat(auto-fill, minmax(300px, 1fr))'
                     m={10}
-                    spacing='30px'>
-
+                    spacing='30px'
+                  >
                     {this.state.createdBooks.map((book) => {
                       return (
                         <Box>
@@ -183,10 +189,11 @@ class Bookshelf extends React.Component {
                               ':hover': {
                                 transition: 'transform 0.5s',
                                 transform: 'translateY(-10px)',
-                                boxShadow: '0 40px 43px -60px #595959'
+                                boxShadow: '0 40px 43px -60px #595959',
                               },
                             }}
-                            h="100%">
+                            h='100%'
+                          >
                             <Center>
                               <CardBody>
                                 <Center>
@@ -209,8 +216,22 @@ class Bookshelf extends React.Component {
                     })}
                   </SimpleGrid>
                 </>
+              ) : this.state.hasBooks === true ? (
+                <>
+                  <Box h={'65vh'}>
+                    <Center h={'30vh'}></Center>
+                    <Progress size='md' isIndeterminate />
+                  </Box>
+                  {/* <Skeleton
+                    startColor='pink.500'
+                    endColor='orange.500'
+                    height='20px'
+                  /> */}
+                </>
               ) : (
-                <h3>Your bookshelf is empty! Create a book now</h3>
+                <Text fontSize={'3xl'} fontWeight={'semibold'}>
+                  Your bookshelf is empty! Create a book now
+                </Text>
               )}
             </>
           ) : (
@@ -237,9 +258,7 @@ class Bookshelf extends React.Component {
               </Alert>
             </>
           )}
-
         </motion.div>
-
       </>
     );
   }
