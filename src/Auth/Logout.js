@@ -8,7 +8,7 @@ function Logout() {
   } = useAuth0();
 
   const handleLogout = () => {
-    logout({ returnTo: window.location.origin });
+    logout({ returnTo: process.env.REACT_APP_AUTH_REDIRECT_URI });
   }
 
   return isAuthenticated &&
