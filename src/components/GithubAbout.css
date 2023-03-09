@@ -55,21 +55,25 @@
     letter-spacing: 2px;
 }
 
-img {
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+/* img {
     margin: auto;
     margin-top: 20px;
+} */
+
+.contribution-chart {
+    bottom: 0;
 }
 
 .mb-4 {
     margin-top: 1.5rem !important;
-}
-
-.grow {
-    transition: all .2s ease-in-out;
-}
-
-.grow:hover {
-    transform: scale(1.1);
 }
 
 @media (max-width: 767px) {
@@ -126,21 +130,6 @@ img {
     margin-right: 0.5rem;
 }
 
-
-/* .grow {
-    transition-delay: 3s;
-    transition-property: ease-in-out;
-    transition-duration: 10s;
-    transition-timing-function: linear;
-    transition-delay: 5s;
-    transition-property: cubic-bezier(0.4, 0, 1, 1);
-}
-
-.grow:hover {
-    transform: scale(1.1);
-    transition-delay: 5s;
-} */
-
 .box {
     transition: box-shadow .3s;
     margin: 50px;
@@ -153,27 +142,3 @@ img {
 .box:hover {
     box-shadow: 0 0 11px rgba(33, 33, 33, .2);
 }
-
-.privacy-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--accent);
-    z-index: 2;
-  }
-  
-  .progress {
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: var(--accent);
-    bottom: 100px;
-  }
-
-  #progress .indicator {
-    stroke: var(--accent);
-  }
-
