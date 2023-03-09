@@ -10,6 +10,7 @@ import {
     Button
 } from '@chakra-ui/react';
 import DeleteBook from './DeleteBook';
+import Pages from './Pages';
 
 const Book = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,7 +21,9 @@ const Book = (props) => {
 
     return (
         <>
-            <Button onClick={onOpen}>Expand</Button>
+            <Button
+                m={4}
+                onClick={onOpen}>Expand</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
@@ -28,7 +31,11 @@ const Book = (props) => {
                     <ModalHeader>{book.title}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {book.story}
+                        <Pages
+                            story={book.story}
+                            cover={book.cover}
+                        />
+
                     </ModalBody>
                     <ModalFooter>
                         <Button

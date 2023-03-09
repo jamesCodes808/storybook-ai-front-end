@@ -1,8 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-
+import { motion, useIsPresent } from "framer-motion";
 import { withAuth0 } from '@auth0/auth0-react';
-import { Container, VStack, Center, Heading, Card, CardBody, Image, Button } from '@chakra-ui/react';
+import {
+  Container,
+  Center,
+  Heading,
+  Card,
+  CardBody,
+  Image,
+  Button,
+  SimpleGrid,
+  Box
+} from '@chakra-ui/react';
 // import { motion } from 'framer-motion';
 import { Link as ReactLink } from 'react-router-dom';
 import {
@@ -30,6 +40,7 @@ class Bookshelf extends React.Component {
       index: 0,
     }
   }
+
 
 
   postBook = async (inputData) => {
@@ -150,31 +161,56 @@ class Bookshelf extends React.Component {
 
   render() {
     console.log(this.props.auth0);
+    console.log('created books', this.state.createdBooks)
     return (
       <>
-        <VStack>
 
 
-          {this.props.auth0.isAuthenticated ? (
-            <>
-              <Container>
-                <CreateBook
-                  postBook={this.postBook}
-                  test={this.state.sampleProp}
-                />
-              </Container>
-              {this.state.createdBooks.length > 0 ? (
-                <>
-                  <Container>
-                    {this.state.createdBooks.map((book) => {
-                      return (
-                        <Card style={{ textAlign: 'center' }}>
+
+        {this.props.auth0.isAuthenticated ? (
+          <>
+            <Container
+              m={4}
+              ml='auto'
+              mr='auto'>
+              <CreateBook
+                postBook={this.postBook}
+                test={this.state.sampleProp}
+              />
+            </Container>
+
+            {this.state.createdBooks.length > 0 ? (
+              <>
+
+                <SimpleGrid
+                  // h='60vh'
+                  templateColumns='repeat(auto-fill, minmax(300px, 1fr))'
+                  m={10}
+                  spacing='30px'>
+                  {this.state.createdBooks.map((book) => {
+                    return (
+                      <Box>
+                        <Card
+
+                          className='storybook-container'
+                          maxW='md'
+                          style={{ textAlign: 'center' }}
+                          sx={{
+                            ':hover': {
+                              transition: 'transform 0.5s',
+                              transform: 'translateY(-10px)',
+                              boxShadow: '0 40px 43px -60px #595959'
+                            },
+                          }}
+                          h="100%"
+                        >
                           <Center>
-                            <CardBody>
+                            <CardBody
+                            >
                               <Center>
                                 <Image
-                                  src={book.cover}
-                                  alt='book cover'
+                                  src={`data:image /png;base64, ${book.cover}`}
+                                  alt={book.title}
                                 />
                               </Center>
                               <Heading>{book.title}</Heading>
@@ -182,39 +218,46 @@ class Bookshelf extends React.Component {
                             </CardBody>
                           </Center>
                         </Card>
-                      );
-                    })}
-                  </Container>
-                </>
-              ) : (
-                <h3>Your bookshelf is empty! Create a book now</h3>
-              )}
-            </>
-          ) : (
-            <>
-              <Alert
-                status='error'
-                variant='subtle'
-                flexDirection='column'
-                alignItems='center'
-                justifyContent='center'
-                textAlign='center'
-                height='70.5vh'
-              >
-                <AlertIcon boxSize='40px' mr={0} />
-                <AlertTitle mt={4} mb={1} fontSize='lg'>
-                  Warning!
-                </AlertTitle>
-                <AlertDescription mb='2' maxWidth='sm'>
-                  You need to be logged in to access your bookshelf.
-                </AlertDescription>
-                <Button colorScheme='blue' as={ReactLink} to='/login'>
-                  Sign In
-                </Button>
-              </Alert>
-            </>
-          )}
-        </VStack>
+                      </Box>
+                    );
+                  })}
+                </SimpleGrid>
+              </>
+            ) : (
+              <h3>Your bookshelf is empty! Create a book now</h3>
+            )}
+          </>
+        ) : (
+          <>
+            <Alert
+              status='error'
+              variant='subtle'
+              flexDirection='column'
+              alignItems='center'
+              justifyContent='center'
+              textAlign='center'
+              height='70.5vh'
+            >
+              <AlertIcon boxSize='40px' mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize='lg'>
+                Warning!
+              </AlertTitle>
+              <AlertDescription mb='2' maxWidth='sm'>
+                You need to be logged in to access your bookshelf.
+              </AlertDescription>
+              <Button colorScheme='blue' as={ReactLink} to='/login'>
+                Sign In
+              </Button>
+            </Alert>
+          </>
+        )}
+        <motion.div
+          initial={{ scaleX: 1 }}
+          animate={{ scaleX: 0, transition: { duration: 0.5, ease: "circOut" } }}
+          exit={{ scaleX: 1, transition: { duration: 0.5, ease: "circIn" } }}
+          // style={{ originX: isPresent ? 0 : 1 }}
+          className="privacy-screen"
+        />
       </>
     );
   }

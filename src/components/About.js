@@ -1,3 +1,4 @@
+
 import { Component } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "./About.css";
@@ -16,8 +17,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(faTwitter, faFontAwesome, faGithub, faLinkedin);
-
-
 
 class Profile extends Component {
   render() {
@@ -41,10 +40,12 @@ class Profile extends Component {
           <Col xs={12} md={6}>
             <h3 className="profile-name">Reed Vogt</h3>
             <p className="profile-description">
+
               Hi, I'm Reed! I'm a passionate developer who loves building
               websites and applications that make people's lives easier. I also
               love books which is why I created this app!
             </p>
+
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
                 <FontAwesomeIcon icon="fa-brands fa-twitter" />
@@ -120,11 +121,13 @@ class Profile extends Component {
           <Col xs={12} md={6}>
             <h3 className="profile-name">Sheldon Pierce</h3>
             <p className="profile-description">
+
               Hi, I'm a member of the development team and I'm passionate about
               creating innovative solutions using cutting-edge technologies. I'm
               excited to be a part of this project and to help make a difference
               in people's lives.
             </p>
+
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
                 <FontAwesomeIcon icon="fa-brands fa-twitter" />
@@ -150,11 +153,13 @@ class Profile extends Component {
           <Col xs={12} md={6} style={{ float: "right" }}>
             <h3 className="profile-name">Ethan Albers</h3>
             <p className="profile-description">
+
               Hi, I'm a member of the development team and I'm passionate about
               creating innovative solutions using cutting-edge technologies. I'm
               excited to be a part of this project and to help make a difference
               in people's lives.
             </p>
+
             <div className="profile-social-links">
               <a href="https://twitter.com/reedvogt">
                 <FontAwesomeIcon icon="fa-brands fa-twitter" />
@@ -200,3 +205,4 @@ class Profile extends Component {
 }
 
 export default Profile;
+
