@@ -4,22 +4,23 @@ import { Image } from '@chakra-ui/react'
 
 
 const Pages = (props) => {
-    const story = props.story;
+    /* const story = props.story;
     const listOfPages = story.split('. ');
-    const cover = props.cover;
+    const cover = props.cover; */
+    const pages = props.pages;
 
-    console.log(listOfPages)
+    console.log(pages);
 
     return (
         <>
             <Carousel infiniteLoop showThumbs={false}>
-                <Image
-                    src={`data:image/png;base64, ${cover}`}
-                    height="auto"
-                    width="800px">
-                </Image>
-                {listOfPages.map((page) => {
-                    return <p>{page}</p>
+                {pages.map((page) => {
+                    <Image
+                        src={`data:image/png;base64, ${page.picture}`}
+                        height="auto"
+                        width="800px">
+                    </Image>
+                    return <p>{page.text}</p>
                 })}
             </Carousel>
         </>

@@ -32,7 +32,7 @@ const Book = (props) => {
                     <ModalCloseButton />
                     <ModalBody>
                         <Pages
-                            story={book.story}
+                            pages={book.pages}
                             cover={book.cover}
                         />
 
