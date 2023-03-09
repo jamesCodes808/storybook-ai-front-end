@@ -18,6 +18,7 @@ import {
 
 library.add(faTwitter, faFontAwesome, faGithub, faLinkedin);
 
+
 class Profile extends Component {
   render() {
     return (
@@ -205,4 +206,5 @@ class Profile extends Component {
 }
 
 export default Profile;
+
 
