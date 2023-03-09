@@ -4,13 +4,17 @@ import { motion, useIsPresent } from 'framer-motion';
 import { withAuth0 } from '@auth0/auth0-react';
 import {
   Container,
+
   VStack,
+
   Center,
   Heading,
   Card,
   CardBody,
   Image,
   Button,
+
+
 } from '@chakra-ui/react';
 // import { motion } from 'framer-motion';
 import { Link as ReactLink } from 'react-router-dom';
@@ -143,9 +147,10 @@ class Bookshelf extends React.Component {
 
   render() {
     console.log(this.props.auth0);
-
+    console.log('created books', this.state.createdBooks)
     return (
       <>
+
         <motion.div
         initial={{y: '100%'}}
         animate={{y: '0%'}}
@@ -218,6 +223,7 @@ class Bookshelf extends React.Component {
             )}
           </VStack>
         </motion.div>
+
       </>
     );
   }
