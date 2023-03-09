@@ -57,7 +57,7 @@
 
 img {
     margin: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .mb-4 {
@@ -162,18 +162,17 @@ img {
     bottom: 0;
     background-color: var(--accent);
     z-index: 2;
-  }
-  
-  .progress {
+}
+
+.progress {
     position: fixed;
     left: 0;
     right: 0;
     height: 5px;
     background: var(--accent);
     bottom: 100px;
-  }
+}
 
-  #progress .indicator {
+#progress .indicator {
     stroke: var(--accent);
-  }
-
+}
