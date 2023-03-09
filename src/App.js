@@ -39,11 +39,10 @@ export default function App({ Component, pageProps }) {
   ]);
 
   const location = useLocation();
-  console.log(element);
-  console.log('pathname', location.pathname);
+
 
   if (!element) return null;
-  console.log(element);
+
   return (
     // console.log(element.pathname)
 

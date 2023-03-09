@@ -15,12 +15,15 @@ const Pages = (props) => {
         <>
             <Carousel infiniteLoop showThumbs={false}>
                 {pages.map((page) => {
-                    <Image
-                        src={`data:image/png;base64, ${page.picture}`}
-                        height="auto"
-                        width="800px">
-                    </Image>
-                    return <p>{page.text}</p>
+
+                    return <>
+                        <Image
+                            src={`data:image/png;base64, ${page.picture}`}
+                            height="auto"
+                            width="800px">
+                        </Image>
+                        <p>{page.text}</p>
+                    </>
                 })}
             </Carousel>
         </>

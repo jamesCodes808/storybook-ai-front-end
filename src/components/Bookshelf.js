@@ -57,7 +57,7 @@ class Bookshelf extends React.Component {
           createdBooks: [...prevState.createdBooks, newBook],
         }));
         this.getBooks();
-        console.log(this.state.createdBooks);
+
       } catch (err) {
         console.error(err);
       }
@@ -88,12 +88,12 @@ class Bookshelf extends React.Component {
       };
 
       const booksResponse = await axios(config);
-
+      console.log('---------From GET Method-------', booksResponse.data)
       this.setState({ createdBooks: booksResponse.data });
     }
   };
 
-  updateBook = async () => {
+  updateBookTitle = async () => {
     try {
     } catch (err) {
       console.error(err);
@@ -114,7 +114,7 @@ class Bookshelf extends React.Component {
 
     try {
       const response = await axios(config);
-      console.log(response.data);
+
       this.getBooks();
     } catch (err) {
       console.error(err);
@@ -143,8 +143,7 @@ class Bookshelf extends React.Component {
   }
 
   render() {
-    console.log(this.props.auth0);
-    console.log('created books', this.state.createdBooks)
+
     return (
       <>
 
@@ -200,6 +199,7 @@ class Bookshelf extends React.Component {
                                 <Book
                                   book={book}
                                   deleteBook={this.deleteBook}
+                                  updateBookTitle={this.updateBookTitle}
                                 />
                               </CardBody>
                             </Center>
