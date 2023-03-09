@@ -154,12 +154,12 @@ class Bookshelf extends React.Component {
     return (
       <>
         <motion.div
-          initial={{ y: '100%' }}
-          animate={{ y: '0%' }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          exit={{ opacity: 1 }}
-          className='absolute top-0 left-0 w-full h-full'
-        >
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        transition={{ duration: 0.5, ease: 'easeOut'}}
+        exit={{opacity: 0}}
+        className='absolute top-0 left-0 w-full h-full'
+      >
           {this.props.auth0.isAuthenticated ? (
             <>
               <Container mt='30px'>
