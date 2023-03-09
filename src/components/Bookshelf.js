@@ -4,17 +4,14 @@ import { motion, useIsPresent } from 'framer-motion';
 import { withAuth0 } from '@auth0/auth0-react';
 import {
   Container,
-
-  VStack,
-
   Center,
   Heading,
   Card,
   CardBody,
   Image,
   Button,
-
-
+  SimpleGrid,
+  Box
 } from '@chakra-ui/react';
 // import { motion } from 'framer-motion';
 import { Link as ReactLink } from 'react-router-dom';
@@ -152,33 +149,51 @@ class Bookshelf extends React.Component {
       <>
 
         <motion.div
-        initial={{y: '100%'}}
-        animate={{y: '0%'}}
-        transition={{ duration: 0.5, ease: 'easeOut'}}
-        exit={{opacity: 1}}
-        className='absolute top-0 left-0 w-full h-full'
-      >
-          <VStack>
-            {this.props.auth0.isAuthenticated ? (
-              <>
-                <Container>
-                  <CreateBook
-                    postBook={this.postBook}
-                    test={this.state.sampleProp}
-                  />
-                </Container>
-                {this.state.createdBooks.length > 0 ? (
-                  <>
-                    <Container>
-                      {this.state.createdBooks.map((book) => {
-                        return (
-                          <Card style={{ textAlign: 'center' }}>
+          initial={{ y: '100%' }}
+          animate={{ y: '0%' }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          exit={{ opacity: 1 }}
+          className='absolute top-0 left-0 w-full h-full'
+        >
+
+          {this.props.auth0.isAuthenticated ? (
+            <>
+              <Container>
+                <CreateBook
+                  postBook={this.postBook}
+                  test={this.state.sampleProp}
+                />
+              </Container>
+
+              {this.state.createdBooks.length > 0 ? (
+                <>
+                  <SimpleGrid
+                    // h='60vh'
+                    templateColumns='repeat(auto-fill, minmax(300px, 1fr))'
+                    m={10}
+                    spacing='30px'>
+
+                    {this.state.createdBooks.map((book) => {
+                      return (
+                        <Box>
+                          <Card
+                            style={{ textAlign: 'center' }}
+                            className='storybook-container'
+                            maxW='md'
+                            sx={{
+                              ':hover': {
+                                transition: 'transform 0.5s',
+                                transform: 'translateY(-10px)',
+                                boxShadow: '0 40px 43px -60px #595959'
+                              },
+                            }}
+                            h="100%">
                             <Center>
                               <CardBody>
                                 <Center>
                                   <Image
                                     src={`data:image /png;base64, ${book.cover}`}
-                                    alt='book cover'
+                                    alt={book.title}
                                   />
                                 </Center>
                                 <Heading>{book.title}</Heading>
@@ -189,39 +204,40 @@ class Bookshelf extends React.Component {
                               </CardBody>
                             </Center>
                           </Card>
-                        );
-                      })}
-                    </Container>
-                  </>
-                ) : (
-                  <h3>Your bookshelf is empty! Create a book now</h3>
-                )}
-              </>
-            ) : (
-              <>
-                <Alert
-                  status='error'
-                  variant='subtle'
-                  flexDirection='column'
-                  alignItems='center'
-                  justifyContent='center'
-                  textAlign='center'
-                  height='70.5vh'
-                >
-                  <AlertIcon boxSize='40px' mr={0} />
-                  <AlertTitle mt={4} mb={1} fontSize='lg'>
-                    Warning!
-                  </AlertTitle>
-                  <AlertDescription mb='2' maxWidth='sm'>
-                    You need to be logged in to access your bookshelf.
-                  </AlertDescription>
-                  <Button colorScheme='blue' as={ReactLink} to='/login'>
-                    Sign In
-                  </Button>
-                </Alert>
-              </>
-            )}
-          </VStack>
+                        </Box>
+                      );
+                    })}
+                  </SimpleGrid>
+                </>
+              ) : (
+                <h3>Your bookshelf is empty! Create a book now</h3>
+              )}
+            </>
+          ) : (
+            <>
+              <Alert
+                status='error'
+                variant='subtle'
+                flexDirection='column'
+                alignItems='center'
+                justifyContent='center'
+                textAlign='center'
+                height='70.5vh'
+              >
+                <AlertIcon boxSize='40px' mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize='lg'>
+                  Warning!
+                </AlertTitle>
+                <AlertDescription mb='2' maxWidth='sm'>
+                  You need to be logged in to access your bookshelf.
+                </AlertDescription>
+                <Button colorScheme='blue' as={ReactLink} to='/login'>
+                  Sign In
+                </Button>
+              </Alert>
+            </>
+          )}
+
         </motion.div>
 
       </>
