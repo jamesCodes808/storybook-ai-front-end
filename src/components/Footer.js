@@ -15,7 +15,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { GiBookshelf } from 'react-icons/gi';
 // import { Logo } from './Logo'
 
-export const Footer = () => (
+const Footer = () => (
   <Box w='100%' bg={useColorModeValue('gray.100', 'gray.900')} zIndex={'1'}>
     <Container
       as='footer'
@@ -61,3 +61,5 @@ export const Footer = () => (
     </Container>
   </Box>
 );
+
+ export default Footer;

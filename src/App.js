@@ -11,10 +11,10 @@ import Login from './Auth/Login';
 import Logout from './Auth/Logout';
 
 import Landingpage from './components/Landingpage';
-import { Footer } from './components/Footer';
+import Footer from './components/Footer';
 import About from './components/About';
 
-export default function App() {
+export default function App({ Component, pageProps }) {
   const element = useRoutes([
     {
       path: '/',
@@ -51,7 +51,7 @@ export default function App() {
       {/* <Router> */}
       <Navbar />
       <main>
-        <AnimatePresence mode='wait' initial={false}>
+        <AnimatePresence initial={false}>
           {React.cloneElement(element, { key: location.pathname })}
         </AnimatePresence>
       </main>

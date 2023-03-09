@@ -11,7 +11,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 // import FaCentercode from 'react-icons/fa';
 
-import { motion, useIsPresent,useScroll, useSpring } from 'framer-motion';
+import { motion, useIsPresent, useScroll, useSpring } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,9 +19,15 @@ import { useColorModeValue } from '@chakra-ui/react';
 
 // library.add( faTwitter, faFontAwesome, faGithub, faLinkedin )
 
-export function About() {
-
+export default function About() {
   return (
+    <motion.div
+        initial={{y: '60%'}}
+        animate={{y: '0%'}}
+        transition={{ duration: 1, ease: 'easeOut'}}
+        exit={{opacity: 1}}
+        className='absolute top-0 left-0 w-full h-full'
+      >
       <Container className='my-5 profile-container'>
         <h2 className='about-us-heading text-center mb-4'>About Us</h2>
         <Row className='justify-content-center align-items-center'>
@@ -141,10 +147,11 @@ export function About() {
           </Col>
         </Row>
       </Container>
+    </motion.div>
   );
 }
 
-export default About;
+// export default About;
 
 // class About extends Component {
 //   render() {
