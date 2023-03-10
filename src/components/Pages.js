@@ -1,7 +1,7 @@
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Image } from '@chakra-ui/react'
-
+import { Text } from '@chakra-ui/react';
 
 const Pages = (props) => {
     /* const story = props.story;
@@ -22,7 +22,7 @@ const Pages = (props) => {
                             height="auto"
                             width="800px">
                         </Image>
-                        <p>{page.text}</p>
+                        <Text marginTop={4} fontSize={'xl'} fontWeight='semibold'>{page.text}</Text>
                     </>
                 })}
             </Carousel>

@@ -5,24 +5,22 @@ import {
   CardBody,
   Heading,
   Text,
-  Button,
   Stack,
   HStack,
   Center,
-  useDisclosure,
-  Collapse,
-  Box,
   Image,
+  IconButton,
+  Tooltip,
+  VStack,
 } from '@chakra-ui/react';
-import myPhoto from './headshot.png';
-import sheldon from './face.jpg';
-// import {
-//   faFontAwesome,
-//   faTwitter,
-//   faGithub,
-//   faLinkedin,
-// } from '@fortawesome/free-brands-svg-icons';
+
+import { Link as ReactLink } from 'react-router-dom';
+
+import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GithubStats from './githubStats';
+import GithubInfo from './GithubInfo';
 
 // access token
 const octokit = new Octokit({
@@ -61,18 +59,24 @@ class GitApi extends React.Component {
             name: user.name,
             location: user.location,
             bio: user.bio,
+            repos: user.public_repos,
             followers: user.followers,
             login: user.login,
             avatar: user.avatar_url,
-            linkedIn: ['https://www.linkedin.com/in/james-ian-ragasa-solima/', 'https://www.linkedin.com/in/sheldon-pierce/', 'https://www.linkedin.com/in/ethanalbers/', 'https://www.linkedin.com/in/reed-vogt-student/'],
-            twitter: ['https://twitter.com/jamesCodes808']
+            linkedIn: [
+              'https://www.linkedin.com/in/james-ian-ragasa-solima/',
+              'https://www.linkedin.com/in/sheldon-pierce/',
+              'https://www.linkedin.com/in/ethanalbers/',
+              'https://www.linkedin.com/in/reed-vogt-student/',
+            ],
+            twitter: ['https://twitter.com/jamesCodes808', null, null, null],
           })),
         });
       });
   }
 
-  openButton() {}
   render() {
+    console.log(this.state);
     return (
       // <div>
       <>
@@ -90,13 +94,15 @@ class GitApi extends React.Component {
               direction={{ base: 'column', sm: 'row' }}
               overflow='hidden'
               variant='outline'
-              width={'50%'}
+              width={'cover'}
               margin='10'
+              p={5}
               paddingLeft={8}
             >
               {/* <GitApi /> */}
               <Image
                 objectFit='cover'
+                borderRadius={'full'}
                 maxW={{ base: '60%', sm: '200px' }}
                 src={user.avatar}
                 alt='Sheldon Picture'
@@ -104,54 +110,66 @@ class GitApi extends React.Component {
               <Stack>
                 <CardBody>
                   <Center>
-                    <Heading size='md'>{user.name}</Heading>
+                    <Heading size='lg'>{user.name}</Heading>
                   </Center>
-
-                  <Text py='2' fontSize={'20'}>
-                    <span fontSize='40'>"</span>{user.bio}
-                  </Text>
                   <Center>
-                    <HStack marginBottom={'10'}>
-                      <div className='profile-social-links'>
-                        <a href={`${user.twitter[index]}`} target={'_blank'} rel='noreferrer'>
-                          <FontAwesomeIcon icon='fa-brands fa-twitter' />
-                          {'Twitter'}
-                        </a>
-                        <a href={`${user.linkedIn[index]}`} target={'_blank'} rel='noreferrer'>
-                          <FontAwesomeIcon icon='fa-brands fa-linkedin' />
-                          {'LinkedIn'}
-                        </a>
-                        <a href={`https://github.com/${user.login}`} target={'_blank'} rel='noreferrer'>
-                          <FontAwesomeIcon icon='fa-brands fa-github' />
-                          {'Github'}
-                        </a>
-                      </div>
+                    <Text py='2' fontSize={'20'}>
+                      <span fontSize='40'>"</span>
+                      {user.bio}
+                    </Text>
+                  </Center>
+                  <Center>
+                    <HStack margin={'5'}>
+                      <HStack>
+                        {user.twitter[index] === null ? null : (
+                          <Tooltip label='Twitter'>
+                            <IconButton
+                              as={ReactLink}
+                              to={`${user.twitter[index]}`}
+                              colorScheme='blue'
+                              aria-label='Search database'
+                              icon={<FaTwitter />}
+                              target={'_blank'}
+                              rel='noreferrer'
+                            />
+                          </Tooltip>
+                        )}
+                        <Tooltip label='LinkedIn'>
+                          <IconButton
+                            as={ReactLink}
+                            to={`${user.linkedIn[index]}`}
+                            colorScheme='blue'
+                            aria-label='Search database'
+                            icon={<FaLinkedin />}
+                            target={'_blank'}
+                            rel='noreferrer'
+                          />
+                        </Tooltip>
+
+                        <Tooltip label='Github'>
+                          <IconButton
+                            as={ReactLink}
+                            to={`https://github.com/${user.login}`}
+                            colorScheme='blue'
+                            aria-label='Search database'
+                            icon={<FaGithub />}
+                            target={'_blank'}
+                            rel='noreferrer'
+                          />
+                        </Tooltip>
+                      </HStack>
                     </HStack>
                   </Center>
                   <Center>
-                    <Button
-                      w='40%'
-                      key={0}
-                      marginBottom={15}
-                      onClick={null}
-                      marginRight='20'
-                      isDisabled
-                    >
-                      GitHub Stats
-                    </Button>
-                    <Button w='40%' marginBottom={15} onClick={null} isDisabled>
-                      GitHub Info
-                    </Button>
+                    <HStack>
+                      <VStack>
+                        <GithubStats index={index} users={user.login} />
+                      </VStack>
+                      <VStack>
+                        <GithubInfo index={index} users={user}/>
+                      </VStack>
+                    </HStack>
                   </Center>
-                  <Collapse key={0} in={null}>
-                    <Box width='100%'>
-                      <Image
-                        boxSize='400px'
-                        src={`https://ghchart.rshah.org/HEXCOLORCODE/${user.login}`}
-                        alt='Name Your Github chart'
-                      />
-                    </Box>
-                  </Collapse>
                 </CardBody>
               </Stack>
             </Card>
