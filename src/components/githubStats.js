@@ -37,7 +37,7 @@ const GithubStats = (props) => {
             <Image
               // boxSize='400px'
               w={'100%'}
-              src={`https://ghchart.rshah.org/HEXCOLORCODE/${userLogin}`}
+              src={`https://ghchart.rshah.org/26A641/${userLogin}`}
               alt='Name Your Github chart'
             />
           </Box>

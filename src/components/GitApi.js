@@ -61,6 +61,7 @@ class GitApi extends React.Component {
             bio: user.bio,
             repos: user.public_repos,
             followers: user.followers,
+            following: user.following,
             login: user.login,
             avatar: user.avatar_url,
             linkedIn: [
