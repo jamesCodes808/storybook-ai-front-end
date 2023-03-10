@@ -1,6 +1,28 @@
-
-import React from "react";
-import { Octokit } from "@octokit/rest";
+import React from 'react';
+import { Octokit } from '@octokit/rest';
+import {
+  Card,
+  CardBody,
+  Heading,
+  Text,
+  Button,
+  Stack,
+  HStack,
+  Center,
+  useDisclosure,
+  Collapse,
+  Box,
+  Image,
+} from '@chakra-ui/react';
+import myPhoto from './headshot.png';
+import sheldon from './face.jpg';
+// import {
+//   faFontAwesome,
+//   faTwitter,
+//   faGithub,
+//   faLinkedin,
+// } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // access token
 const octokit = new Octokit({
@@ -19,241 +41,125 @@ class GitApi extends React.Component {
   componentDidMount() {
     Promise.all([
       octokit.users.getByUsername({
-        username: "jamesCodes808",
+        username: 'jamesCodes808',
       }),
       octokit.users.getByUsername({
-        username: "Sheldon-Pierce",
+        username: 'Sheldon-Pierce',
       }),
       octokit.users.getByUsername({
-        username: "ekalber",
+        username: 'ekalbers',
       }),
       octokit.users.getByUsername({
-        username: "reedoooo",
+        username: 'reedoooo',
       }),
     ])
       .then((responses) => responses.map((response) => response.data))
       .then((data) => {
+        console.log(data);
         this.setState({
           users: data.map((user) => ({
             name: user.name,
             location: user.location,
             bio: user.bio,
             followers: user.followers,
+            login: user.login,
+            avatar: user.avatar_url,
+            linkedIn: ['https://www.linkedin.com/in/james-ian-ragasa-solima/', 'https://www.linkedin.com/in/sheldon-pierce/', 'https://www.linkedin.com/in/ethanalbers/', 'https://www.linkedin.com/in/reed-vogt-student/'],
+            twitter: ['https://twitter.com/jamesCodes808']
           })),
         });
       });
   }
 
+  openButton() {}
   render() {
     return (
-      <div>
+      // <div>
+      <>
         {this.state.users.map((user, index) => (
-          <div key={index}>
-            <h1>{user.name}</h1>
-            <p>Location: {user.location}</p>
-            <p>Bio: {user.bio}</p>
-            <p>Followers: {user.followers}</p>
-          </div>
+          //     <div key={index}>
+          //       <h1>{user.name}</h1>
+          //       <p>Location: {user.location}</p>
+          //       <p>Bio: {user.bio}</p>
+          //       <p>Followers: {user.followers}</p>
+          //     </div>
+          //   ))}
+          // </div>
+          <Center key={index}>
+            <Card
+              direction={{ base: 'column', sm: 'row' }}
+              overflow='hidden'
+              variant='outline'
+              width={'50%'}
+              margin='10'
+              paddingLeft={8}
+            >
+              {/* <GitApi /> */}
+              <Image
+                objectFit='cover'
+                maxW={{ base: '60%', sm: '200px' }}
+                src={user.avatar}
+                alt='Sheldon Picture'
+              />
+              <Stack>
+                <CardBody>
+                  <Center>
+                    <Heading size='md'>{user.name}</Heading>
+                  </Center>
+
+                  <Text py='2' fontSize={'20'}>
+                    <span fontSize='40'>"</span>{user.bio}
+                  </Text>
+                  <Center>
+                    <HStack marginBottom={'10'}>
+                      <div className='profile-social-links'>
+                        <a href={`${user.twitter[index]}`} target={'_blank'} rel='noreferrer'>
+                          <FontAwesomeIcon icon='fa-brands fa-twitter' />
+                          {'Twitter'}
+                        </a>
+                        <a href={`${user.linkedIn[index]}`} target={'_blank'} rel='noreferrer'>
+                          <FontAwesomeIcon icon='fa-brands fa-linkedin' />
+                          {'LinkedIn'}
+                        </a>
+                        <a href={`https://github.com/${user.login}`} target={'_blank'} rel='noreferrer'>
+                          <FontAwesomeIcon icon='fa-brands fa-github' />
+                          {'Github'}
+                        </a>
+                      </div>
+                    </HStack>
+                  </Center>
+                  <Center>
+                    <Button
+                      w='40%'
+                      key={0}
+                      marginBottom={15}
+                      onClick={null}
+                      marginRight='20'
+                      isDisabled
+                    >
+                      GitHub Stats
+                    </Button>
+                    <Button w='40%' marginBottom={15} onClick={null} isDisabled>
+                      GitHub Info
+                    </Button>
+                  </Center>
+                  <Collapse key={0} in={null}>
+                    <Box width='100%'>
+                      <Image
+                        boxSize='400px'
+                        src={`https://ghchart.rshah.org/HEXCOLORCODE/${user.login}`}
+                        alt='Name Your Github chart'
+                      />
+                    </Box>
+                  </Collapse>
+                </CardBody>
+              </Stack>
+            </Card>
+          </Center>
         ))}
-      </div>
+      </>
     );
   }
 }
 
 export default GitApi;
-
-
-// import React from "react";
-
-// class GitApi extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       users: []
-//     };
-//   }
-
-//   componentDidMount() {
-//     Promise.all([
-//       fetch('https://api.github.com/users/jamesCodes808'),
-//       fetch('https://api.github.com/users/Sheldon-Pierce'),
-//       fetch('https://api.github.com/users/ekalber'),
-//       fetch('https://api.github.com/users/reedoooo')
-//     ])
-//       .then(responses => Promise.all(responses.map(response => response.json())))
-//       .then(data => {
-//         this.setState({
-//           users: data.map(user => ({
-//             name: user.name,
-//             location: user.location,
-//             bio: user.bio,
-//             followers: user.followers
-//           }))
-//         });
-//       });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         {this.state.users.map(user => (
-//           <div key={user.name}>
-//             <h1>{user.name}</h1>
-//             <p>Location: {user.location}</p>
-//             <p>Bio: {user.bio}</p>
-//             <p>Followers: {user.followers}</p>
-//           </div>
-//         ))}
-//       </div>
-//     );
-//   }
-// }
-
-// export default GitApi;
-
-
-// import React from "react";
-
-// class GitApi extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       user: {},
-//       user2: {},
-//       user3: {},
-//       user4: {}
-//     };
-//   }
-
-//   componentDidMount() {
-//     fetch('https://api.github.com/users/jamesCodes808')
-//       .then(res => res.json())
-//       .then(data => {
-//         this.setState({
-//           user: {
-//             name: data.name,
-//             location: data.location,
-//             bio: data.bio,
-//             followers: data.followers
-//           }
-//         });
-//       });
-
-//     fetch('https://api.github.com/users/Sheldon-Pierce')
-//       .then(res => res.json())
-//       .then(data => {
-//         this.setState({
-//           user2: {
-//             name: data.name,
-//             location: data.location,
-//             bio: data.bio,
-//             followers: data.followers
-//           }
-//         });
-//       });
-
-//     fetch('https://api.github.com/users/ekalber')
-//       .then(res => res.json())
-//       .then(data => {
-//         this.setState({
-//           user3: {
-//             name: data.name,
-//             location: data.location,
-//             bio: data.bio,
-//             followers: data.followers
-//           }
-//         });
-//       });
-
-//     fetch('https://api.github.com/users/reedoooo')
-//       .then(res => res.json())
-//       .then(data => {
-//         this.setState({
-//           user4: {
-//             name: data.name,
-//             location: data.location,
-//             bio: data.bio,
-//             followers: data.followers
-//           }
-//         });
-//       });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>{this.state.user.name}</h1>
-//         <p>Location: {this.state.user.location}</p>
-
-//         <h1>{this.state.user2.name}</h1>
-//         <p>Location: {this.state.user2.location}</p>
-//         <p>Bio: {this.state.user2.bio}</p>
-//         <p>Followers: {this.state.user2.followers}</p>
-
-//         <h1>{this.state.user3.name}</h1>
-//         <p>Location: {this.state.user3.location}</p>
-//         <p>Bio: {this.state.user3.bio}</p>
-//         <p>Followers: {this.state.user3.followers}</p>
-
-//         <h1>{this.state.user4.name}</h1>
-//         <p>Location: {this.state.user4.location}</p>
-//         <p>Bio: {this.state.user4.bio}</p>
-//         <p>Followers: {this.state.user4.followers}</p>
-//       </div>
-//     );
-//   }
-// }
-
-// export default GitApi;
-
-// import React, { Component } from 'react';
-
-// class GitApi extends Component {
-//   state = {
-//     users: [],
-//     name: '',
-//     location: '',
-//     bio: '',
-//     followers: ''
-//   };
-
-//   componentDidMount() {
-//     fetch('https://api.github.com/users/reedoooo')
-//       .then(response => response.json())
-//       .then(data => this.setState({ users: data }))
-
-//     fetch('https://api.github.com/users/jamesCodes808')
-//       .then(response => response.json())
-//       .then(data => this.setState({ users: data }))
-
-//     fetch('https://api.github.com/users/Sheldon-Pierce')
-//       .then(response => response.json())
-//       .then(data => this.setState({ users: data }))
-
-//     fetch('https://api.github.com/users/ekalber')
-//       .then(response => response.json())
-//       .then(data => this.setState({ users: data }))
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>GitHub Users</h1>
-//         <ul>
-//           {this.state.users.map(user => (
-//             <li key={user.id}>
-//               <h2>{user.login}</h2>
-//               <p>{user.id}</p>
-//               <p>{user.avatar_url}</p>
-//               <p>{user.url}</p>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   };
-// }
-
-
-// export default GitApi;
-

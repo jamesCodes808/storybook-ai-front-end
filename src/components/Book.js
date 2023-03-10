@@ -45,10 +45,10 @@ const Book = (props) => {
                             mr={3}
                             onClick={onClose}>Close</Button>
 
-                        <EditBookTitle
+                        {/* <EditBookTitle
                             updateBookTitle={updateBookTitle}
                             book={book}>
-                        </EditBookTitle>
+                        </EditBookTitle> */}
 
                         <DeleteBook
                             deleteBook={deleteBook}
