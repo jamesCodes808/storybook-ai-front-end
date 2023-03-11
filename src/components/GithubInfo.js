@@ -11,7 +11,6 @@ import {
 
 const GithubInfo = (props) => {
   const { isOpen, onToggle } = useDisclosure();
-  const index = props.index;
   const user = props.users;
 
   return (

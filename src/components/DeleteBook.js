@@ -21,8 +21,6 @@ const DeleteBook = (props) => {
         onClose()
     }
 
-    console.log(book)
-
     return (
         <>
             <Button

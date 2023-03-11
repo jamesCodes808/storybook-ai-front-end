@@ -7,12 +7,11 @@ import {
   faGithub,
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
-import { useDisclosure, Text, Center } from '@chakra-ui/react';
+import { Text, Center } from '@chakra-ui/react';
 
 library.add(faTwitter, faFontAwesome, faGithub, faLinkedin);
 
 const About = () => {
-  const { isOpen, onToggle } = useDisclosure();
   return (
     <motion.div
       initial={{ opacity: 0 }}

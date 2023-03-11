@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { Octokit } from "@octokit/rest";
 
-// access token
 const octokit = new Octokit({
   auth: process.env.REACT_APP_ACCESS_TOKEN,
   redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-  // client_id: process.env.CLIENT_SECRET,
 });
-// octokit
-//   .request("GET /")
-//   .then(console.log, console.log);
 
 const styles = {
   container: {
@@ -52,7 +47,6 @@ class GithubAbout extends Component {
     try {
       this.setState({ loading: true });
 
-      // Retrieve user information for multiple users
       const users = ["reedoooo", "jamesCodes808", "Sheldon-Pierce", "ekalber"];
 
       const data = await Promise.all(

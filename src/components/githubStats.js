@@ -7,14 +7,11 @@ import {
   Box,
   Image,
   useDisclosure,
-  isOpen,
-  onToggle,
   VStack,
 } from '@chakra-ui/react';
 
 const GithubStats = (props) => {
   const { isOpen, onToggle } = useDisclosure();
-  const index = props.index;
   const userLogin = props.users;
 
   return (
@@ -35,7 +32,6 @@ const GithubStats = (props) => {
         <Collapse key={userLogin} in={isOpen}>
           <Box width='100%'>
             <Image
-              // boxSize='400px'
               w={'100%'}
               src={`https://ghchart.rshah.org/26A641/${userLogin}`}
               alt='Name Your Github chart'

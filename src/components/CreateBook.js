@@ -4,7 +4,6 @@ import {
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
@@ -34,7 +33,6 @@ const CreateBook = (props) => {
         <>
             <Center>
                 <Button
-                    // color={'white'}
                     colorScheme={'blue'}
                     onClick={onOpen}>Create Book</Button>
 

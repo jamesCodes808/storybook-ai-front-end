@@ -8,12 +8,9 @@ import {
   useColorModeValue,
   Flex,
   Icon,
-  Input,
-  Button,
 } from '@chakra-ui/react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { GiBookshelf } from 'react-icons/gi';
-// import { Logo } from './Logo'
 
 const Footer = () => (
   <Box w='100%' bg={useColorModeValue('gray.100', 'gray.900')} zIndex={'1'}>
@@ -62,4 +59,4 @@ const Footer = () => (
   </Box>
 );
 
- export default Footer;
+export default Footer;
