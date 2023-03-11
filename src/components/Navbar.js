@@ -12,13 +12,11 @@ import {
   useColorModeValue,
   useColorMode,
   Circle,
-  Tooltip,
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { GiBookshelf } from 'react-icons/gi';
 import { useAuth0 } from '@auth0/auth0-react';
-// import { AnimatePresence } from 'framer-motion';
 
 const links = [
   { linkName: 'Bookshelf', path: '/bookshelf' },
@@ -116,20 +114,6 @@ const Navbar = () => {
               Sign In
             </Button>
           )}
-
-          {/* <Button
-            as={ReactLink}
-            to='/registration'
-            m={2}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize='sm'
-            fontWeight={600}
-            _hover={{ bg: 'orange.400' }}
-            bg='blue.500'
-            color='white'
-          >
-            Sign Up
-          </Button> */}
         </Flex>
       </Flex>
       {isOpen ? (
@@ -140,9 +124,6 @@ const Navbar = () => {
                 {link.linkName}
               </NavLink>
             ))}
-            {/* <NavLink key='sign up' path='/registration'>
-              Sign Up
-            </NavLink> */}
           </Stack>
         </Box>
       ) : null}

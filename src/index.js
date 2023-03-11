@@ -10,8 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// const history = createMemoryHistory();
-
 root.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH_DOMAIN}

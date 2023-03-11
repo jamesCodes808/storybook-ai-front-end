@@ -3,7 +3,6 @@ import {
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure,
@@ -30,7 +29,6 @@ const EditBookTitle = (props) => {
         <>
             <Center>
                 <Button
-                    // color={'white'}
                     mr={3}
                     onClick={onOpen}>Edit Title</Button>
 

@@ -13,16 +13,11 @@ import {
   Tooltip,
   VStack,
 } from '@chakra-ui/react';
-
 import { Link as ReactLink } from 'react-router-dom';
-
 import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GithubStats from './githubStats';
 import GithubInfo from './GithubInfo';
 
-// access token
 const octokit = new Octokit({
   auth: process.env.REACT_APP_ACCESS_TOKEN,
   redirect_uri: process.env.REACT_APP_REDIRECT_URI,
@@ -53,7 +48,6 @@ class GitApi extends React.Component {
     ])
       .then((responses) => responses.map((response) => response.data))
       .then((data) => {
-        console.log(data);
         this.setState({
           users: data.map((user) => ({
             name: user.name,
@@ -77,19 +71,9 @@ class GitApi extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
-      // <div>
       <>
         {this.state.users.map((user, index) => (
-          //     <div key={index}>
-          //       <h1>{user.name}</h1>
-          //       <p>Location: {user.location}</p>
-          //       <p>Bio: {user.bio}</p>
-          //       <p>Followers: {user.followers}</p>
-          //     </div>
-          //   ))}
-          // </div>
           <Center key={index}>
             <Card
               direction={{ base: 'column', sm: 'row' }}
@@ -100,7 +84,6 @@ class GitApi extends React.Component {
               p={5}
               paddingLeft={8}
             >
-              {/* <GitApi /> */}
               <Image
                 objectFit='cover'
                 borderRadius={'full'}
@@ -167,7 +150,7 @@ class GitApi extends React.Component {
                         <GithubStats index={index} users={user.login} />
                       </VStack>
                       <VStack>
-                        <GithubInfo index={index} users={user}/>
+                        <GithubInfo index={index} users={user} />
                       </VStack>
                     </HStack>
                   </Center>

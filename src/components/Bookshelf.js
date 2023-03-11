@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { motion, useIsPresent } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { withAuth0 } from '@auth0/auth0-react';
 import {
   Container,
@@ -12,11 +12,9 @@ import {
   Button,
   SimpleGrid,
   Box,
-  Skeleton,
   Progress,
   Text,
 } from '@chakra-ui/react';
-// import { motion } from 'framer-motion';
 import { Link as ReactLink } from 'react-router-dom';
 import {
   Alert,
@@ -27,7 +25,6 @@ import {
 
 import CreateBook from './CreateBook';
 import Book from './Book';
-// import Login from '../Auth/Login';
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -45,7 +42,6 @@ class Bookshelf extends React.Component {
 
   postBook = async (inputData) => {
     if (this.props.auth0.isAuthenticated) {
-      console.log(inputData);
 
       const res = await this.props.auth0.getIdTokenClaims();
 
@@ -68,15 +64,6 @@ class Bookshelf extends React.Component {
   };
 
   getBooks = async () => {
-    /* let apiUrl = `${SERVER}/books`
-  
-    try {
-        const response = await axios.get(apiUrl);
-        console.log(response.data)
-        this.setState({ createdBooks: response.data });
-    } catch (err) {
-        console.error(err)
-    } */
 
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
@@ -91,12 +78,10 @@ class Bookshelf extends React.Component {
       };
 
       const booksResponse = await axios(config);
-      console.log('---------From GET Method-------', booksResponse.data);
-      console.log(booksResponse)
-      
+
       booksResponse.status === 200
-      ? this.setState({ hasBooks: true, createdBooks: booksResponse.data })
-      : this.setState({ hasBooks: false })
+        ? this.setState({ hasBooks: true, createdBooks: booksResponse.data })
+        : this.setState({ hasBooks: false })
     }
   };
 
@@ -120,8 +105,7 @@ class Bookshelf extends React.Component {
     };
 
     try {
-      const response = await axios(config);
-
+      await axios(config);
       this.getBooks();
     } catch (err) {
       console.error(err);
@@ -131,35 +115,19 @@ class Bookshelf extends React.Component {
   async componentDidMount() {
     if (this.props.auth0.isAuthenticated) {
       this.getBooks();
-
-      /* const res = await this.props.auth0.getIdTokenClaims();
-  
-      const jwt = res.__raw;
-  
-      const config = {
-          headers: { "Authorization": `Bearer ${jwt}` },
-          method: 'get',
-          baseURL: process.env.REACT_APP_SERVER,
-          url: '/books'
-      }
-  
-      const booksResponse = await axios(config);
-  
-      this.setState({ createdBooks: booksResponse.data }); */
     }
   }
 
   render() {
-    console.log(this.state)
     return (
       <>
         <motion.div
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        transition={{ duration: 0.5, ease: 'easeOut'}}
-        exit={{opacity: 0}}
-        className='absolute top-0 left-0 w-full h-full'
-      >
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          exit={{ opacity: 0 }}
+          className='absolute top-0 left-0 w-full h-full'
+        >
           {this.props.auth0.isAuthenticated ? (
             <>
               <Container mt='30px'>
@@ -170,10 +138,9 @@ class Bookshelf extends React.Component {
               </Container>
 
               {this.state.createdBooks.length > 0 &&
-              this.state.hasBooks === true ? (
+                this.state.hasBooks === true ? (
                 <>
                   <SimpleGrid
-                    // h='60vh'
                     templateColumns='repeat(auto-fill, minmax(300px, 1fr))'
                     m={10}
                     spacing='30px'
@@ -222,11 +189,6 @@ class Bookshelf extends React.Component {
                     <Center h={'30vh'}></Center>
                     <Progress size='md' isIndeterminate />
                   </Box>
-                  {/* <Skeleton
-                    startColor='pink.500'
-                    endColor='orange.500'
-                    height='20px'
-                  /> */}
                 </>
               ) : (
                 <Text fontSize={'3xl'} fontWeight={'semibold'}>

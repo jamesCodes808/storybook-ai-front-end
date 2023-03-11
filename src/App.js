@@ -2,8 +2,7 @@ import './App.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import * as React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Routes, useLocation, useRoutes } from 'react-router-dom';
+import { useLocation, useRoutes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { AnimatePresence } from 'framer-motion';
 import Bookshelf from './components/Bookshelf';
@@ -14,7 +13,7 @@ import Landingpage from './components/Landingpage';
 import Footer from './components/Footer';
 import About from './components/About';
 
-export default function App({ Component, pageProps }) {
+export default function App() {
   const element = useRoutes([
     {
       path: '/',
@@ -44,7 +43,6 @@ export default function App({ Component, pageProps }) {
   if (!element) return null;
 
   return (
-    // console.log(element.pathname)
 
     <ChakraProvider>
       {/* <Router> */}
@@ -55,7 +53,6 @@ export default function App({ Component, pageProps }) {
         </AnimatePresence>
       </main>
       <Footer />
-      {/* </Router> */}
     </ChakraProvider>
   );
 }

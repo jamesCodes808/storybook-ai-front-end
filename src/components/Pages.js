@@ -4,9 +4,6 @@ import { Image } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react';
 
 const Pages = (props) => {
-    /* const story = props.story;
-    const listOfPages = story.split('. ');
-    const cover = props.cover; */
     const pages = props.pages;
 
     console.log(pages);
