@@ -1,4 +1,7 @@
-# 301-project-tempname
+# Storybook AI
+## A website for making AI generated children's books
+### [Deployed Site](https://storybookai.netlify.app/)
+### [Backend Repository](https://github.com/jamesCodes808/storybook-ai-back-end#readme)
 
 ## Team
 
